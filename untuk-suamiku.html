@@ -206,7 +206,7 @@
             transform: scale(1) translateY(0);
         }
 
-        .message-card h2 { color: #ff00de; margin-bottom: 15px; font-size: 1.8rem; }
+        .message-card h2 { color: #0000ff ; margin-bottom: 15px; font-size: 1.8rem; }
         .message-card p { font-size: 1.05rem; line-height: 1.6; color: #fff; white-space: pre-wrap;}
         .restart-btn { margin-top: 25px; background: transparent; color: rgba(255,255,255,0.6); border: none; text-decoration: underline; cursor: pointer; }
 
@@ -272,7 +272,7 @@
 
     <!-- NAMA YG ULTAH -->
         <div class="message-card" id="message-card">
-            <h2>HAPPY BIRTHDAY<br>Suamiku💍</h2>
+            <h2>HAPPY BIRTHDAY<br>SUAMIKU💍</h2>
             <!-- Teks dikosongkan untuk diisi animasi mengetik -->
             <p id="typing-text"></p>
     <!-- PENGIRIM --> 
@@ -401,7 +401,7 @@
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
                     // Mengubah parameter menjadi array untuk handle 2 baris
-                    setTimeout(() => createTextParticles("SUAMIKU 💍", this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["💋REYNALDI ANDIKA","VICKY HANGGARA💋"], this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);
                 } else {

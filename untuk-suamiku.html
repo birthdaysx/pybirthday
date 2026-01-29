@@ -401,7 +401,7 @@
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
                     // Mengubah parameter menjadi array untuk handle 2 baris
-                    setTimeout(() => createTextParticles(["💋REYNALDI ANDIKA","VICKY HANGGARA💋"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["💋REYNALDI","ANDIKA VICKY","HANGGARA💋"], this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);
                 } else {
@@ -427,6 +427,7 @@
             if (Array.isArray(text)) {
                 tCtx.fillText(text[0], 300, 60);
                 tCtx.fillText(text[1], 300, 120);
+                tCtx.fillText(text[2], 300, 180);
             } else {
                 tCtx.fillText(text, 300, 100);
             }

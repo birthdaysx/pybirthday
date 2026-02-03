@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sayang!</title>
+    <style>
+        :root {
+            --pink-soft: #ffdde1;
+            --pink-bright: #ffafbd;
+            --text-color: #555;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom, var(--pink-soft), var(--pink-bright));
+            overflow: hidden;
+            color: var(--text-color);
+        }
+
+        /* Hujan Emoticon */
+        .emoji-rain {
+            position: fixed;
+            top: -10%;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Container Utama */
+        #content-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Media */
+        .sticker-gif {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .photo-frame {
+            width: 220px;
+            border-radius: 15px;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+
+        .photo-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .photo-small {
+            width: 140px;
+        }
+
+        /* Tulisan */
+        h1 { font-family: 'Quicksand';font-size: 1.5rem; margin: 10px 0; }
+        h3 { font-family: 'Quicksand';}
+        p { font-family: 'Quicksand'; font-size: 1rem; margin: 5px 0; line-height: 1.5; font-weight: bold;}
+        .small-text { font-size: 0.8rem; opacity: 0.8; }
+
+        /* Tombol */
+        button {
+            background-color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: #ff6b81;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        button:hover { transform: scale(1.1); }
+
+        /* Watermark */
+        #watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.7rem;
+            color: rgba(0, 0, 0, 0.377);
+            animation: blink 3s infinite;
+            z-index: 100;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Typewriter Page */
+        #typewriter {
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            text-align: left;
+            max-width: 320px;
+            margin: 0 auto;
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="https://birthdaysx.github.io/Musik/ultah.mp3" type="audio/mpeg">
+    </audio>
+
+    <div style="font-family: 'Lucida Calligraphy' ; font-size: 12px;" id="watermark">from ur belove <br> @Webcute <3</div>
+
+    <div id="content-container">
+        
+        <div class="page active" id="p1">
+            <img src="https://media.tenor.com/6yBqtjeP1ekAAAAi/bubu-dudu-sseeyall.gif" class="sticker-gif">
+            <h1>HAPPY BIRTHDAYY <br> GANTENGKUU SAYANGKUU <br> ૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა </h1>
+            <p>there's more waiting... click to find out ✨</p>
+            <button onclick="nextPage(1)">tap <3</button>
+        </div>
+
+        <div class="page" id="p2">
+            <img src="https://media.tenor.com/AZ12YafzVwwAAAAi/bubu-dudu-prince-bubu-dudu-princess.gif" class="sticker-gif">
+            <p>sayangg udah berusaha lebih baik untuk setiap tahunnya yaa. <br> sayangkuu kerennn cekaliee, happy birthday sayangg🤍</p>
+            <button onclick="nextPage(2)">open it <3</button>
+        </div>
+
+        <div class="page" id="p3">
+            <img src="https://media.tenor.com/vU1ym9EtbNoAAAAi/tkthao219-bubududu.gif" class="sticker-gif">
+            <p>makin tambah umur makin ganteng aja nii<br>pacarkuuuuu, nda adil ihh</p>
+            <button onclick="nextPage(3)"><3</button>
+        </div>
+
+        <div class="page" id="p4">
+            <img src="https://media.tenor.com/vroVodINV0EAAAAi/tkthao219-bubududu.gif" class="sticker-gif">
+            <p>okeii inii terakhir sayangkuu, aku buatin sesuatuu untuk birthday nyaaa sayanggg,</p>
+            <p>dibaca pelan pelan aja yaa sayangkuu 🎂</p>
+            <button onclick="nextPage(4)">okayy <3</button>
+        </div>
+
+        <div class="page" id="p5">
+            <img src="https://luzairx.github.io/Foto/bgg.jpeg" class="photo-frame"> 
+            <h3>sayangg pantas dapetin semua cinta didunia hari ini dan selamanyaa,<br>happy birthday cintakuuu🤍</h3>
+            <p class="text">tiimaaci sayangg udah jadi bagian terbaikku <3</p>
+            <button onclick="nextPage(5)">open this (♡ ᵔ ᵕ ᵔ ♡)</button>
+        </div>
+
+        <div class="page" id="p6">
+            <div class="photo-group">
+                <img src="https://luzairx.github.io/Foto/cowo1.jpeg" class="photo-frame photo-small"> <img src="https://luzairx.github.io/Foto/cowo2.jpeg" class="photo-frame photo-small"> </div>
+            <h3>setiap tahun, sayang semakin bijak, semakin baik hati sama semua orangg, dan semakin luar biasa.<br>        Happy birthday, my boy ♡</h3>
+            <p class="text">kalau ditanya apa yang paling indah hari ini? jawabanku kamu, sayangkuu.</p>
+            <button onclick="nextPage(6)">♡</button>
+        </div>
+
+        <div class="page" id="p7">
+            <img src="https://luzairx.github.io/Foto/bgg2.jpeg" class="photo-frame"> 
+            <h3>akuu slaluu ssayangg ke sayang setiap harinya dan akan bertambah teruss sayangg, aku gaakan pernah bosen ke sayangg 🥹🥹</h3>
+            <p class="text">it's your day, sayangg. dibaca pelan ajaa, aku punya surat kecil buat bubbieee🎂</p>
+            <button onclick="nextPage(7)">♡</button>
+        </div>
+
+        <div class="page" id="p8">
+            <img src="https://media.tenor.com/OhAj7i51mWUAAAAj/dudu-birthday-day-gif.gif" class="sticker-gif"> 
+            <h1 style="font-size: 1.2rem;">HAPPYY <br> BIRTHDAYY GANTENGKU <br> SAYANGG ૮₍´˶> . < ⑅ ₎ა</h1>
+            <div id="typewriter"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Konfigurasi Emoticon
+        const emojis = ['💖', '🧸', '🎀', '🌸', '✨'];
+        
+        function createEmoji() {
+            const e = document.createElement('div');
+            e.className = 'emoji-rain';
+            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.animationDuration = Math.random() * 3 + 2 + 's';
+            e.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(e);
+            setTimeout(() => e.remove(), 5000);
+        }
+        setInterval(createEmoji, 300);
+
+        // Navigasi Halaman
+        function nextPage(current) {
+            // Putar musik di klik pertama
+            if(current === 1) {
+                document.getElementById('bgMusic').play();
+            }
+            // EFEK PARTY POPPER SAAT KLIK DARI PAGE 7 KE 8
+            if(current === 7) {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ffafbd', '#ffc3a0', '#ff6b81', '#ffffff']
+                });
+            }
+
+            document.getElementById('p' + current).classList.remove('active');
+            const next = current + 1;
+            document.getElementById('p' + next).classList.add('active');
+
+            if(next === 8) {
+                startTypewriter();
+            }
+        }
+
+        // Efek Mengetik
+        const text = `it’s your special day, sayang 💐 wish u all the best, bubbiee🤍 maacii sayang udaa lahir kedunia ini dan jadi pasanganku. selamat bertumbuh jadi versi yang lebih baik setiap harinya, sayangku, cintaku. pajang umur dan sehat selalu ya sayangg, biar kita bisa bareng terus🥹💗
+
+harapan akuu dihari ulang tahun sayangg, apapun yang sayang minta, cari, dan harapkan, semoga satu persatu terwujud, hari ini dan seterusnya 🤍
+
+semoga tuhan mengabulkan hal-hal baik yang benar-benar diinginkan hati sayangg. makasii yaa sayangg, udah nerima aku dengan semua kekuranganku 🥹💗
+
+sayangg pantas dapetin yang lebih baik, sayangg berharga, dan aku ngga pernah malu punya sayangg. aku justru pengen pamer ke dunia, karena aku punya sayangg (⁠っ⁠.⁠❛⁠ ⁠ᴗ⁠ ⁠❛⁠.⁠)⁠っ
+
+terkadang menang cuma diri sendiri yang bisa diandalkan, tapi jangan pernah ngerasa sendirian yaa sayangg. ada bayak orang yang sayang sama kamu, dan aku juga selalu ada untuk kamu💓
+
+aku juga minta maaf ya sayangg, aku selama ini belum bisa jadi pendengar yang baik. but i’ll try, sayangg.
+
+Semoga hal baik selalu beriringan sama ayangg. Semoga semesta selalu berpihak, dan langkah-langkah sayang selalu dimudahkan. Terus tumbuh, terus melangkah, dan terus berbahagia ya sayangg🫶🏻🤍
+
+Aku akan selalu bangga dan support sayangg, atas semua proses yang sudah sayang lewatinn sayang hebat, berharga, dan kuat setiap harinya🤍
+
+happy 17 years old, sayangg💐 aku akan selalu ada buat sayang, disetiap proses, disetiap hari, aku selalu sama sayangg 💗💗
+
+— from ur pretty girlfriend 🧸`;
+
+        function startTypewriter() {
+            let i = 0;
+            const target = document.getElementById("typewriter");
+            function type() {
+                if (i < text.length) {
+                    target.innerHTML += text.charAt(i);
+                    i++;
+                    target.scrollTop = target.scrollHeight;
+                    setTimeout(type, 50);
+                }
+            }
+            type();
+        }
+    </script>
+</body>
+</html>

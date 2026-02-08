@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Surprise</title> 
-    <!-- Menambahkan link font Quicksand agar terbaca di canvas -->
+    <title>Happy Birthday Ziraa</title> 
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -14,11 +13,9 @@
             overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
-            /* Menghindari zoom otomatis saat klik cepat di iOS */
             touch-action: manipulation;
         }
 
-        /* Canvas sebagai background tetap */
         #canvas {
             position: fixed;
             top: 0;
@@ -29,7 +26,6 @@
             display: none;
         }
 
-        /* Overlay halaman */
         .page {
             position: fixed;
             top: 0;
@@ -44,17 +40,17 @@
             transition: opacity 0.5s ease-in-out, visibility 0.5s;
         }
 
-        /* Khusus halaman 3 agar bisa di-scroll */
         #page-3 {
-            position: absolute; /* Ganti fixed ke absolute agar bisa scroll */
+            position: absolute; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Mulai dari atas */
+            justify-content: flex-start;
             align-items: center;
+            padding-top: 20px;
             padding-bottom: 50px;
-            overflow-y: auto; /* Aktifkan scroll vertikal */
-            background: rgba(0, 0, 0, 0.7);
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.85);
         }
 
         .hidden {
@@ -63,7 +59,6 @@
             pointer-events: none;
         }
 
-        /* Halaman 1: Kado */
         #page-1 {
             background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
             z-index: 100;
@@ -98,10 +93,8 @@
             50% { transform: rotate(5deg) translateY(-20px); }
         }
 
-        /* Halaman 2: Kembang Api Overlay */
         #page-2 {
             pointer-events: auto;
-            /* Pastikan z-index cukup tinggi dan background transparan agar klik tembus */
             background: transparent;
         }
 
@@ -129,116 +122,129 @@
             box-shadow: 0 0 20px white;
         }
 
-        /* Container Galeri Foto */
         .photo-gallery {
             position: relative;
             width: 100%;
-            height: 100px; /* Area khusus foto */
-            flex-shrink: 0; 
-        } 
- 
+            height: 380px;
+            flex-shrink: 0;
+            margin-bottom: 0px; 
+        }
+
         .photo-item {
             position: absolute;
-            width: 180px;
-            padding: 10px;
+            width: 150px;
+            padding: 8px;
             background: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             pointer-events: auto;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s, opacity 0.5s, top 0.5s;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s, top 0.5s;
             z-index: 11;
             opacity: 0;
-            top: 120%; 
+            top: 80%; 
         }
 
         .photo-item.reveal { opacity: 1; }
 
-        .photo-item:hover {
-            transform: scale(1.1) rotate(0deg) !important;
-            z-index: 50;
-        }
-
         .photo-item img {
             width: 100%;
-            height: 180px;
+            height: 150px;
             object-fit: cover;
             display: block;
         }
 
-        /* Penempatan foto agar tidak menumpuk di area pesan */
-        .photo-1.reveal { top: 5%; left: 5%; transform: rotate(-10deg); }
-        .photo-2.reveal { top: 8%; right: 5%; transform: rotate(8deg); }
-        .photo-5.reveal { top: 30%; left: 30%; transform: rotate(-5deg); }
+        .photo-1.reveal { top: 5%; left: 8%; transform: rotate(-8deg); }
+        .photo-2.reveal { top: 10%; right: 8%; transform: rotate(10deg); }
+        .photo-5.reveal { top: 42%; left: 50%; transform: translateX(-50%) rotate(-3deg); }
 
-        @media (max-width: 768px) { 
-            .photo-gallery { height: 500px; }
-            .photo-item { width: 130px; }
-            .photo-item img { height: 130px; }
-            /* Penyesuaian mobile agar tidak keluar layar */
-            .photo-1.reveal { top: 5%; left: 5%; }
-            .photo-2.reveal { top: 5%; right: 5%; }
-            .photo-5.reveal { top: 30%; left: 35%; transform: rotate(5deg); }
+        /* Style Stiker Tenor */
+        .tenor-sticker {
+            position: absolute;
+            width: 80px; /* Ukuran stiker */
+            height: auto;
+            opacity: 0;
+            z-index: 12;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
         }
- 
+        
+        .tenor-sticker.reveal { opacity: 1; }
+        
+        /* Posisi di samping kanan kiri foto bawah (photo-5) */
+        .sticker-left { top: 55%; left: 15%; transform: rotate(-15deg); }
+        .sticker-right { top: 55%; right: 15%; transform: rotate(15deg); }
+
+        @media (max-width: 768px) {
+            .photo-gallery { height: 320px; }
+            .photo-item { width: 115px; }
+            .photo-item img { height: 115px; }
+            .photo-1.reveal { top: 2%; left: 5%; }
+            .photo-2.reveal { top: 8%; right: 5%; }
+            .photo-5.reveal { top: 45%; left: 50%; transform: translateX(-50%) rotate(2deg); }
+            .tenor-sticker { width: 60px; }
+            .sticker-left { left: 5%; top: 60%; }
+            .sticker-right { right: 5%; top: 60%; }
+        }
+
+        .scroll-hint {
+            position: relative;
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+            display: none;
+            z-index: 70;
+        }
+
         .message-card {
             position: relative;
             z-index: 60;
             max-width: 450px;
             width: 85%;
             background: rgba(255, 255, 255, 0.12);
-            padding: 30px;
+            padding: 25px;
             border-radius: 25px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             box-shadow: 0 20px 50px rgba(0,0,0,0.7); 
             text-align: center;
             opacity: 0;
-            transform: scale(0.8) translateY(30px);
+            transform: scale(0.8) translateY(20px);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 20px; /* Jarak dari galeri */
+            margin-top: 0px; 
         }
 
         #typing-text {
             white-space: pre-wrap;
-}
+        }
 
         .message-card.reveal {
             opacity: 1;
             transform: scale(1) translateY(0);
         }
 
-        .message-card h2 { color: #ff00de; margin-bottom: 15px; font-size: 1.8rem; }
-        .message-card p { font-size: 1.05rem; line-height: 1.6; color: #fff; }
-        .restart-btn { margin-top: 25px; background: transparent; color: rgba(255,255,255,0.6); border: none; text-decoration: underline; cursor: pointer; }
+        .message-card h2 { color: #ff00de; margin-bottom: 10px; font-size: 1.6rem; }
+        .message-card p { font-size: 1rem; line-height: 1.5; color: #fff; }
+        .restart-btn { margin-top: 20px; background: transparent; color: rgba(255,255,255,0.6); border: none; text-decoration: underline; cursor: pointer; }
 
-        /* Gaya untuk efek kursor mengetik */
         #typing-text::after {
             content: '|';
             animation: blink 0.7s infinite;
             color: #ff00de;
-            margin-left: 2px;
         }
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
 
-        /* Hint Scroll untuk HP */
-        .scroll-hint {
-            color: rgba(255,255,255,0.5);
-            font-size: 14px;
-            margin-top: 20px; 
-            animation: bounce 2s infinite;
-            display: none;
-        }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+            40% {transform: translateY(-8px);}
+            60% {transform: translateY(-4px);}
         }
     </style>
 </head>
 <body>
-    <!-- SONG -->
     <audio id="birthday-music" loop preload="auto">
         <source src="https://birthdaysx.github.io/Musik/jambrud-ultah.mp3" type="audio/mpeg">
     </audio>
@@ -258,29 +264,29 @@
         <button id="next-page-btn">Lihat Pesan Spesial ✨</button>
     </div>
 
-    <!-- FOTO -->
     <div id="page-3" class="page hidden"> 
         <div class="photo-gallery"> 
             <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto2/q1.jpeg" alt="Momen 1"></div>
             <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto2/q2.jpeg" alt="Momen 2"></div>
             <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto2/q3.jpeg" alt="Momen 5"></div>
+            
+            <!-- STIKER TENOR: Silahkan ganti link src di bawah ini dengan link stiker pilihanmu -->
+            <img class="tenor-sticker sticker-left" src="https://media.tenor.com/GbcEJbvtqmoAAAAi/bubu-dudu-sseeyall.gif" alt="Stiker Kiri">
+            <img class="tenor-sticker sticker-right" src="https://media.tenor.com/pdv5YIMB-hkAAAAi/cute.gif" alt="Stiker Kanan">
         </div>  
 
         <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya ziraa.. 👇</div>
- 
-    <!-- NAMA YG ULTAH -->
+  
         <div class="message-card" id="message-card"> 
             <h2>Happy Birthday<br>Ziraa</h2>
-            <!-- Teks dikosongkan untuk diisi animasi mengetik -->
             <p id="typing-text"></p>
-    <!-- PENGIRIM --> 
             <p style="font-style: italic; margin-top: 15px;">From Nathan</p>
             <button class="restart-btn" onclick="location.reload()">Mulai Lagi</button>
         </div>
     </div>  
 
     <script>
-        const canvas = document.getElementById('canvas');
+        const canvas = document.getElementById('canvas'); 
         const ctx = canvas.getContext('2d');
         const page1 = document.getElementById('page-1');
         const page2 = document.getElementById('page-2');
@@ -290,6 +296,7 @@
         const messageCard = document.getElementById('message-card');
         const photoItems = document.querySelectorAll('.photo-item');
         const scrollHint = document.getElementById('scroll-hint');
+        const stickers = document.querySelectorAll('.tenor-sticker');
 
         let width, height;
         let particles = [];
@@ -297,10 +304,8 @@
         let isStarted = false;
         let cinematicDone = false;
  
-        // MESSAGE CARD
         const messageToType = "Selamat ulang Tahun Ziraa,semoga panjang umur,sehat selalu,rezekinya lancar terus,aku harap dengan bertambah nya umur ,kamu bisa lebih dewasa,lebih semangat dalam mengejar mimpi-mimpi kamu,dan semoga juga doa-doa kamu cepat terkabul ditahun ini,Amiinnn";
 
-        // DAFTAR UCAPAN (WISHES) 
         const wishes = ["HAPPY BIRTHDAY","PANJANG UMUR","SEHAT SELALU",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES","KAMU TERBAIK","SEMANGAT",];
         let wishIndex = 0;
 
@@ -320,15 +325,12 @@
                 this.color = color;
                 this.targetX = targetX;
                 this.targetY = targetY;
-                
                 const angle = Math.random() * Math.PI * 2;
                 const speed = isBig ? random(8, 25) : random(2, 6);
                 this.velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
-                
                 this.friction = 0.94;
                 this.gravity = (targetX !== null) ? 0 : 0.025;
                 this.opacity = 1;
-                // Wishes dibuat awet (0.002) agar tidak cepat hilang
                 this.decay = (targetX !== null) ? 0.0001 : (isBig ? random(0.0015, 0.012) : random(0.015, 0.03));
             }
             draw() {
@@ -398,7 +400,6 @@
                     for (let i = 0; i < 280; i++) {
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
-                    // Mengubah parameter menjadi array untuk handle 2 baris
                     setTimeout(() => createTextParticles("ZIRAA", this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);  
@@ -414,21 +415,17 @@
             const tempCanvas = document.createElement('canvas');
             const tCtx = tempCanvas.getContext('2d');
             tempCanvas.width = 600;
-            tempCanvas.height = 200; // Tinggi diperbesar untuk 2 baris
-            
+            tempCanvas.height = 200;
             tCtx.fillStyle = 'red'; 
             tCtx.font = "bold 50px 'Quicksand', sans-serif";
             tCtx.textAlign = 'center';
             tCtx.textBaseline = 'middle';
-
-            // Logika untuk merender teks (mendukung string tunggal atau array untuk 2 baris)
             if (Array.isArray(text)) {
                 tCtx.fillText(text[0], 300, 60);
                 tCtx.fillText(text[1], 300, 120);
             } else {
                 tCtx.fillText(text, 300, 100);
             }
-            
             const data = tCtx.getImageData(0, 0, 600, 200).data;
             for (let y = 0; y < 200; y += 4) {
                 for (let x = 0; x < 600; x += 4) {
@@ -445,38 +442,30 @@
             if (!isStarted) return;
             ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
             ctx.fillRect(0, 0, width, height);
-
             lasers = lasers.filter(l => {
                 l.draw();
                 return l.update();
             });
-
             particles = particles.filter(p => {
                 p.draw();
                 p.update();
                 return p.opacity > 0;
             });
-
             if (cinematicDone && lasers.length === 0) {
                 lasers.push(new Laser(random(width * 0.1, width * 0.9), random(height * 0.1, height * 0.4)));
             }
             requestAnimationFrame(animate);
         }
 
-        // Fungsi Animasi Mengetik
         function typeWriter(text, elementId, speed) {
             let i = 0;
             const element = document.getElementById(elementId);
-            element.innerHTML = ""; // Pastikan kosong
-            
+            element.innerHTML = "";
             function type() {
                 if (i < text.length) {
                     element.innerHTML += text.charAt(i);
                     i++;
                     setTimeout(type, speed);
-                } else {
-                    // Hilangkan kursor setelah selesai mengetik (opsional)
-                    // element.style.borderRight = "none";
                 }
             }
             type();
@@ -495,15 +484,12 @@
             }, 500);
         });
 
-        // PERBAIKAN UNTUK iOS: Menggunakan pointerdown agar kompatibel dengan touch dan mouse
         window.addEventListener('pointerdown', (e) => {
             if (cinematicDone && isStarted && e.target.id !== 'next-page-btn') {
                 const text = wishes[wishIndex];
                 const randomColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
-                
                 const clickX = e.clientX;
                 const clickY = e.clientY;
-                
                 createTextParticles(text, clickX, clickY, randomColor);
                 wishIndex = (wishIndex + 1) % wishes.length;
             }
@@ -514,20 +500,21 @@
             page2.classList.add('hidden');
             page3.classList.remove('hidden');
             document.body.style.overflowY = "auto";
-            
             photoItems.forEach((item, i) => {
-                setTimeout(() => item.classList.add('reveal'), i * 300);
+                setTimeout(() => item.classList.add('reveal'), i * 350);
             });
-
+            // Reveal stiker tenor
+            setTimeout(() => {
+                stickers.forEach(s => s.classList.add('reveal'));
+            }, 1000);
+            
             setTimeout(() => {
                 messageCard.classList.add('reveal');
-                if(window.innerWidth < 768) scrollHint.style.display = 'block';
-                
-                // Jalankan animasi mengetik setelah kartu pesan muncul
+                scrollHint.style.display = 'block';
                 setTimeout(() => {
-                    typeWriter(messageToType, "typing-text", 50);
+                    typeWriter(messageToType, "typing-text", 40);
                 }, 800);
-            }, 1800);
+            }, 1500);
         };
     </script>
 </body>

@@ -11,6 +11,7 @@
             --pink-soft: #ffdde1;
             --pink-bright: #ffafbd;
             --text-color: #555;
+            --accent-pink: #ff6b81;
         }
 
         body, html {
@@ -18,7 +19,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Quicksand', sans-serif;
             background: linear-gradient(to bottom, var(--pink-soft), var(--pink-bright));
             overflow: hidden;
             color: var(--text-color);
@@ -43,16 +44,33 @@
             position: relative;
             z-index: 10;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            text-align: center;
             padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Kotak Konten (Glassmorphism Effect) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 8px 32px 0 rgba(255, 107, 129, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .page {
             display: none;
+            width: 100%;
             animation: fadeIn 0.8s ease-in-out;
         }
 
@@ -65,13 +83,13 @@
 
         /* Media */
         .sticker-gif {
-            width: 180px;
+            width: 160px;
             height: auto;
             margin-bottom: 20px;
         }
 
         .photo-frame {
-            width: 220px;
+            width: 200px;
             border-radius: 15px;
             border: 5px solid white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -85,30 +103,73 @@
         }
 
         .photo-small {
-            width: 140px;
+            width: 130px;
+        }
+
+        /* Kalender Mini */
+        .calendar {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            width: 200px;
+            margin: 15px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-size: 0.8rem;
+        }
+        .calendar-header {
+            font-weight: bold;
+            color: var(--accent-pink);
+            margin-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+        .day {
+            padding: 5px 0;
+            position: relative;
+        }
+        .today-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--accent-pink);
+            border-radius: 50%;
+            animation: circleScale 0.8s ease-out forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+        @keyframes circleScale {
+            from { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         /* Tulisan */
-        h1 { font-family: 'Quicksand';font-size: 1.5rem; margin: 10px 0; }
-        h3 { font-family: 'Quicksand';}
-        p { font-family: 'Quicksand'; font-size: 1rem; margin: 5px 0; line-height: 1.5; font-weight: bold;}
-        .small-text { font-size: 0.8rem; opacity: 0.8; }
-
+        h1 { font-size: 1.3rem; margin: 10px 0; color: #444; }
+        h3 { font-size: 1rem; color: #555; }
+        p { font-size: 0.95rem; margin: 10px 0; line-height: 1.5; font-weight: bold;}
+        
         /* Tombol */
         button {
-            background-color: white;
+            background-color: var(--accent-pink);
             border: none;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border-radius: 25px;
-            color: #ff6b81;
+            color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(255, 107, 129, 0.3);
             transition: 0.3s;
         }
 
-        button:hover { transform: scale(1.1); }
+        button:hover { transform: scale(1.05); background-color: #ff4f68; }
 
         /* Watermark */
         #watermark {
@@ -116,9 +177,10 @@
             bottom: 10px;
             right: 15px;
             font-size: 0.7rem;
-            color: rgba(0, 0, 0, 0.377);
+            color: rgba(0, 0, 0, 0.3);
             animation: blink 3s infinite;
             z-index: 100;
+            text-align: right;
         }
 
         @keyframes blink {
@@ -128,16 +190,16 @@
 
         /* Typewriter Page */
         #typewriter {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             white-space: pre-wrap;
             text-align: left;
-            max-width: 320px;
-            margin: 0 auto;
-            height: 300px;
+            max-width: 100%;
+            height: 250px;
             overflow-y: auto;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -147,64 +209,73 @@
         <source src="https://birthdaysx.github.io/Musik/ultah.mp3" type="audio/mpeg">
     </audio>
 
-    <div style="font-family: 'Lucida Calligraphy' ; font-size: 12px;" id="watermark">from ur belove <br> @Webcute <3</div>
+    <div style="font-family: 'Lucida Calligraphy', cursive;" id="watermark">from ur belove <br> @Webcute <3</div>
 
     <div id="content-container">
-        
-        <div class="page active" id="p1">
-            <img src="https://media.tenor.com/6yBqtjeP1ekAAAAi/bubu-dudu-sseeyall.gif" class="sticker-gif">
-            <h1>HAPPY BIRTHDAYY <br> GANTENGKUU SAYANGKUU <br> ૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა </h1>
-            <p>there's more waiting... click to find out ✨</p>
-            <button onclick="nextPage(1)">tap <3</button>
-        </div>
+        <div class="glass-card">
+            
+            <div class="page active" id="p1">
+                <img src="https://media.tenor.com/6yBqtjeP1ekAAAAi/bubu-dudu-sseeyall.gif" class="sticker-gif">
+                <h1>HAPPY BIRTHDAYY <br> GANTENGKUU SAYANGKUU <br> ૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა </h1>
+                <p>there's more waiting... click to find out ✨</p>
+                <button onclick="nextPage(1)">tap <3</button>
+            </div>
 
-        <div class="page" id="p2">
-            <img src="https://media.tenor.com/AZ12YafzVwwAAAAi/bubu-dudu-prince-bubu-dudu-princess.gif" class="sticker-gif">
-            <p>sayangg udah berusaha lebih baik untuk setiap tahunnya yaa. <br> sayangkuu kerennn cekaliee, happy birthday sayangg🤍</p>
-            <button onclick="nextPage(2)">open it <3</button>
-        </div>
+            <div class="page" id="p2">
+                <div class="calendar">
+                    <div class="calendar-header" id="monthLabel">Month 202X</div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Grid generated by JS -->
+                    </div>
+                </div>
+                <p>sayangg udah berusaha lebih baik untuk<br>setiap tahunnya yaa. sayangkuu kerennn<br>cekaliee, happy birthday sayangg🤍</p>
+                <button onclick="nextPage(2)">open it <3</button>
+            </div>
 
-        <div class="page" id="p3">
-            <img src="https://media.tenor.com/vU1ym9EtbNoAAAAi/tkthao219-bubududu.gif" class="sticker-gif">
-            <p>makin tambah umur makin ganteng aja nii<br>pacarkuuuuu, nda adil ihh</p>
-            <button onclick="nextPage(3)"><3</button>
-        </div>
+            <div class="page" id="p3">
+                <img src="https://media.tenor.com/vU1ym9EtbNoAAAAi/tkthao219-bubududu.gif" class="sticker-gif">
+                <p>makin tambah umur makin ganteng aja nii<br>pacarkuuuuu, nda adil ihh</p>
+                <button onclick="nextPage(3)"><3</button>
+            </div>
 
-        <div class="page" id="p4">
-            <img src="https://media.tenor.com/vroVodINV0EAAAAi/tkthao219-bubududu.gif" class="sticker-gif">
-            <p>okeii inii terakhir sayangkuu, aku buatin sesuatuu untuk birthday nyaaa sayanggg,</p>
-            <p>dibaca pelan pelan aja yaa sayangkuu 🎂</p>
-            <button onclick="nextPage(4)">okayy <3</button>
-        </div>
+            <div class="page" id="p4">
+                <img src="https://media.tenor.com/vroVodINV0EAAAAi/tkthao219-bubududu.gif" class="sticker-gif">
+                <p>okeii inii terakhir sayangkuu, aku buatin sesuatuu untuk birthday nyaaa sayanggg,</p>
+                <p>dibaca pelan pelan aja yaa sayangkuu 🎂</p>
+                <button onclick="nextPage(4)">okayy <3</button>
+            </div>
 
-        <div class="page" id="p5">
-            <img src="https://luzairx.github.io/Foto/bgg.jpeg" class="photo-frame"> 
-            <h3>sayangg pantas dapetin semua cinta didunia hari ini dan selamanyaa,<br>happy birthday cintakuuu🤍</h3>
-            <p class="text">tiimaaci sayangg udah jadi bagian terbaikku <3</p>
-            <button onclick="nextPage(5)">open this (♡ ᵔ ᵕ ᵔ ♡)</button>
-        </div>
+            <div class="page" id="p5">
+                <img src="https://luzairx.github.io/Foto/bgg.jpeg" class="photo-frame"> 
+                <h3>sayangg pantas dapetin semua cinta didunia hari ini dan selamanyaa,<br>happy birthday cintakuuu🤍</h3>
+                <p class="text">tiimaaci sayangg udah jadi bagian terbaikku <3</p>
+                <button onclick="nextPage(5)">open this (♡ ᵔ ᵕ ᵔ ♡)</button>
+            </div>
 
-        <div class="page" id="p6">
-            <div class="photo-group">
-                <img src="https://luzairx.github.io/Foto/cowo1.jpeg" class="photo-frame photo-small"> <img src="https://luzairx.github.io/Foto/cowo2.jpeg" class="photo-frame photo-small"> </div>
-            <h3>setiap tahun, sayang semakin bijak, semakin baik hati sama semua orangg, dan semakin luar biasa.<br>        Happy birthday, my boy ♡</h3>
-            <p class="text">kalau ditanya apa yang paling indah hari ini? jawabanku kamu, sayangkuu.</p>
-            <button onclick="nextPage(6)">♡</button>
-        </div>
+            <div class="page" id="p6">
+                <div class="photo-group">
+                    <img src="https://luzairx.github.io/Foto/cowo1.jpeg" class="photo-frame photo-small"> 
+                    <img src="https://luzairx.github.io/Foto/cowo2.jpeg" class="photo-frame photo-small"> 
+                </div>
+                <h3>setiap tahun, sayang semakin bijak, semakin baik hati sama semua orangg, dan semakin luar biasa.<br>Happy birthday, my boy ♡</h3>
+                <p class="text">kalau ditanya apa yang paling indah hari ini? jawabanku kamu, sayangkuu.</p>
+                <button onclick="nextPage(6)">♡</button>
+            </div>
 
-        <div class="page" id="p7">
-            <img src="https://luzairx.github.io/Foto/bgg2.jpeg" class="photo-frame"> 
-            <h3>akuu slaluu ssayangg ke sayang setiap harinya dan akan bertambah teruss sayangg, aku gaakan pernah bosen ke sayangg 🥹🥹</h3>
-            <p class="text">it's your day, sayangg. dibaca pelan ajaa, aku punya surat kecil buat bubbieee🎂</p>
-            <button onclick="nextPage(7)">♡</button>
-        </div>
+            <div class="page" id="p7">
+                <img src="https://luzairx.github.io/Foto/bgg2.jpeg" class="photo-frame"> 
+                <h3>akuu slaluu ssayangg ke sayang setiap harinya dan akan bertambah teruss sayangg, aku gaakan pernah bosen ke sayangg 🥹🥹</h3>
+                <p class="text">it's your day, sayangg. dibaca pelan ajaa, aku punya surat kecil buat bubbieee🎂</p>
+                <button onclick="nextPage(7)">♡</button>
+            </div>
 
-        <div class="page" id="p8">
-            <img src="https://media.tenor.com/OhAj7i51mWUAAAAj/dudu-birthday-day-gif.gif" class="sticker-gif"> 
-            <h1 style="font-size: 1.2rem;">HAPPYY <br> BIRTHDAYY GANTENGKU <br> SAYANGG ૮₍´˶> . < ⑅ ₎ა</h1>
-            <div id="typewriter"></div>
-        </div>
+            <div class="page" id="p8">
+                <img src="https://media.tenor.com/pdv5YIMB-hkAAAAi/cute.gif" class="sticker-gif"> 
+                <h1 style="font-size: 1.1rem;">HAPPYY BIRTHDAYY GANTENGKU SAYANGG ૮₍´˶> . < ⑅ ₎ა</h1>
+                <div id="typewriter"></div>
+            </div>
 
+        </div>
     </div>
 
     <script>
@@ -223,13 +294,37 @@
         }
         setInterval(createEmoji, 300);
 
+        // Generate Calendar Logic
+        function generateCalendar() {
+            const now = new Date();
+            const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            document.getElementById('monthLabel').innerText = "Februari 2026";  //`${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+            
+            const grid = document.getElementById('calendarGrid'); 
+            const targetDay = 14; // Tanggal hari ini yang akan dilingkari
+            
+            // Dummy days for visual
+            for(let i = 1; i <= 31; i++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day';
+                dayDiv.innerText = i;
+                if(i === targetDay) {
+                    const circle = document.createElement('div');
+                    circle.className = 'today-circle';
+                    dayDiv.appendChild(circle);
+                    dayDiv.style.fontWeight = 'bold';
+                    dayDiv.style.color = 'var(--accent-pink)';
+                }
+                grid.appendChild(dayDiv);
+            }
+        }
+        generateCalendar();
+
         // Navigasi Halaman
         function nextPage(current) {
-            // Putar musik di klik pertama
             if(current === 1) {
-                document.getElementById('bgMusic').play();
+                document.getElementById('bgMusic').play().catch(() => {});
             }
-            // EFEK PARTY POPPER SAAT KLIK DARI PAGE 7 KE 8
             if(current === 7) {
                 confetti({
                     particleCount: 150,
@@ -272,6 +367,7 @@ happy 17 years old, sayangg💐 aku akan selalu ada buat sayang, disetiap proses
         function startTypewriter() {
             let i = 0;
             const target = document.getElementById("typewriter");
+            target.innerHTML = ""; // Clear existing
             function type() {
                 if (i < text.length) {
                     target.innerHTML += text.charAt(i);

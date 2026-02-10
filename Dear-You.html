@@ -264,12 +264,12 @@
 
     <!-- FOTO --> 
     <div id="page-3" class="page hidden">
-        <div class="photo-gallery"> 
-            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto/dd1.jpeg" alt="Momen 1"></div>
-            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto/dd2.jpeg" alt="Momen 2"></div>
-            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto/dd3.jpeg" alt="Momen 3"></div>
-            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto/dd4.jpeg" alt="Momen 4"></div>
-            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto/dd5.jpeg" alt="Momen 5"></div>
+        <div class="photo-gallery">  
+            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto2/dd1.jpeg" alt="Momen 1"></div>
+            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto2/dd2.jpeg" alt="Momen 2"></div>
+            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto2/dd3.jpeg" alt="Momen 3"></div>
+            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto2/dd4.jpeg" alt="Momen 4"></div>
+            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto2/dd5.jpeg" alt="Momen 5"></div>
         </div> 
 
         <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya sayangg.. 👇</div>
@@ -301,13 +301,13 @@
         let particles = [];
         let lasers = [];
         let isStarted = false;
-        let cinematicDone = false;
+        let cinematicDone = false; 
  
         // MESSAGE CARD
         const messageToType = "it’s your special day, wish you all the best🤍\n"+"Thank you for being born into this world, for being my partner, for being my world. May all your hopes, your wishes, your prayers come true, and be yours. healthy, long life, and always happy. I will be a good partner for you, always.\n\n"+"Happy 26th birthday";
 
         // DAFTAR UCAPAN (WISHES) 
-        const wishes = [["HAPPY","BIRTHDAY🤍"],["I LOVE","YOU"],"SEHAT SELALU","PANJANG UMUR",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES","LOVE YOU ALWAYS","BAHAGIA TERUS",];
+        const wishes = [["HAPPY","BIRTHDAY🤍"],["I LOVE","YOU"],"SEHAT SELALU","PANJANG UMUR",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES",["LOVE YOU","ALWAYS"],"BAHAGIA TERUS",];
         let wishIndex = 0;
 
         function resize() {
@@ -405,9 +405,9 @@
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
                     // Mengubah parameter menjadi array untuk handle 2 baris
-                    setTimeout(() => createTextParticles(["MY","SADAM"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["WIDI ANIS","PAMBUDI"], this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
-                    setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);  
+                    setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);   
                 } else {
                     for (let i = 0; i < 50; i++) {
                         particles.push(new SharpParticle(this.x, this.y, this.color));

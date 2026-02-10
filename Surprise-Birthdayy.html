@@ -806,7 +806,7 @@
                 <p class="font-small text-sky-400 text-sm mb-6">Only For You</p>
                 <div class="flex space-x-1 text-xl mb-6">💙💙💙💙💙💙💙</div>
                 <div class="text-center text-sky-800 space-y-1 mb-8"> 
-                    <p class="font-bold text-md">From Lele</p>
+                    <p class="font-bold text-md">From Han</p>
                     <p id="date-display" class="text-[10px] opacity-70"></p>
                 </div> 
                 <button onclick="location.reload()" class="bg-white text-sky-500 border-2 border-sky-500 px-8 py-2 rounded-full font-bold text-sm">see again✨</button>
@@ -1319,7 +1319,7 @@
             document.getElementById('envelope-wrapper').classList.add('hidden');
             document.getElementById('letter-opened').classList.remove('hidden');
             
-            const txt = "Happy Birthday Ni luh putu putri trisna dewi<br>it’s your special day, sayang 💐 wish u all the best, bubbiee🤍 maacii sayang udaa lahir kedunia ini dan jadi pasanganku. selamat bertumbuh jadi versi yang lebih baik setiap harinya, sayangku, cintaku. pajang umur dan sehat selalu ya sayangg, biar kita bisa bareng terus🥹💗 harapan akuu dihari ulang tahun sayangg, apapun yang sayang minta, cari, dan harapkan, semoga satu persatu terwujud, hari ini dan seterusnya 🤍 semoga tuhan mengabulkan hal-hal baik yang benar-benar diinginkan hati sayangg. happy birthday sayangg💐 aku akan selalu ada buat sayang, disetiap proses, disetiap hari, aku selalu sama sayangg 💗💗";
+            const txt = "Happy Birthday Ni luh putu putri trisna dewi<br>it’s your special day, sayang 💐 wish u all the best, bubbiee🤍 maacii sayang udaa lahir kedunia ini dan jadi pasanganku. selamat bertumbuh jadi versi yang lebih baik setiap harinya, sayangku, cintaku. pajang umur dan sehat selalu ya sayangg, biar kita bisa bareng terus🥹💗 harapan akuu dihari ulang tahun sayangg, apapun yang sayang minta, cari, dan harapkan, semoga satu persatu terwujud, hari ini dan seterusnya 🤍 semoga tuhan mengabulkan hal-hal baik yang benar-benar diinginkan hati sayangg.<br>happy birthday sayangg💐💗";
             const target = document.getElementById('type-p3');
             target.innerHTML = ""; 
             let i = 0;
@@ -1379,7 +1379,7 @@
                 document.getElementById('seal-loading').classList.add('hidden');
                 document.getElementById('final-sent').classList.remove('hidden');
                 
-                const d = new Date();
+                const d = new Date(`12 Februari 2026`); 
                 const opt = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 document.getElementById('date-display').innerText = d.toLocaleDateString('en-US', opt);
             }, 3000);

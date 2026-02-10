@@ -146,7 +146,7 @@
         #transitionBtn {
             position: fixed;
             bottom: 10%;                 /* Jarak dari bawah layar (makin besar %, makin naik) */
-            left: 33%;                    /* Posisi kiri di tengah layar */
+            left: 40%;                    /* Posisi kiri di tengah layar */
             transform: translateX(-50%); /* Geser balik 50% ukuran tombol biar pas di tengah */
             
             /* --- Kode di  bawah ini biarkan tetap sama --- */
@@ -641,9 +641,9 @@
                 </div>
 
                 <div id="letter-opened" class="hidden flex flex-col items-center">
-                    <div class="bg-white p-4 rounded-xl text-left shadow-inner border border-sky-100 w-full mb-4">
+                    <div class="bg-white p-4 rounded-xl text-left shadow-inner border border-sky-100 w-full mb-4"> 
                         <p id="type-p3" class="font-handwriting text-lg text-sky-800 leading-relaxed"></p>
-                        <p class="text-right mt-4 font-bold text-sky-500 text-xs italic">From Rohani & Risna</p>
+                        <p class="text-right mt-4 font-bold text-sky-500 text-xs italic">From Rohani</p> 
                     </div>
                     <div class="absolute -bottom-4 -left-4 w-12 h-12">💙</div> 
                     <div class="flex flex-col space-y-2 w-full">
@@ -1319,12 +1319,12 @@
             document.getElementById('envelope-wrapper').classList.add('hidden');
             document.getElementById('letter-opened').classList.remove('hidden');
             
-            const txt = "Hey sayang, selamat bertambah usiaa yaa! Aku pengen banget bilang betapa kamu itu luar biasa. Kamu selalu bikin hari-hariku lebih cerah dengan happy world girls day, Kamu itu hebat banget, tahu nggak? Aku kagum sama cara kamu menghadapi segala tantangan, tetap kuat, dan nggak pernah kehilangan semangat. Hari ini, aku mau kamu merasa spesial, karena kamu memang pantas dapetin semua kebahagiaan di dunia ini. Terima kasih sudah jadi perempuan yang menginspirasi dan selalu ada buat aku. Aku cinta kamu, selalu. Nikmatin hari kamu ya, sayang.... Jangan lupa senyum! Love you🤍🤍💗💗🫂🫂";
+            const txt = "Happy Birthday Ni luh putu putri trisna dewi<br>it’s your special day, sayang 💐 wish u all the best, bubbiee🤍 maacii sayang udaa lahir kedunia ini dan jadi pasanganku. selamat bertumbuh jadi versi yang lebih baik setiap harinya, sayangku, cintaku. pajang umur dan sehat selalu ya sayangg, biar kita bisa bareng terus🥹💗 harapan akuu dihari ulang tahun sayangg, apapun yang sayang minta, cari, dan harapkan, semoga satu persatu terwujud, hari ini dan seterusnya 🤍 semoga tuhan mengabulkan hal-hal baik yang benar-benar diinginkan hati sayangg. happy birthday sayangg💐 aku akan selalu ada buat sayang, disetiap proses, disetiap hari, aku selalu sama sayangg 💗💗";
             const target = document.getElementById('type-p3');
             target.innerHTML = ""; 
             let i = 0;
             
-            function type() {
+            function type() { 
                 if (i < txt.length) {
                     // Logic BR otomatis
                     if (txt.charAt(i) === '<') {

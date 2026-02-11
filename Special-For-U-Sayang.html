@@ -377,7 +377,7 @@
                 this.acceleration = isCinematic ? 1.025 : 1.1; 
                 this.velocityUnit = { x: Math.cos(angle), y: Math.sin(angle) };
                 this.hue = isCinematic ? 0 : random(0, 360);
-                this.color = isCinematic ? '#ff4500' : `hsl(${this.hue}, 100%, 70%)`;
+                this.color = isCinematic ? '#00fff0' : `hsl(${this.hue}, 100%, 70%)`;
             }
             draw() {
                 ctx.save();
@@ -397,18 +397,18 @@
                     this.explode();
                     return false;
                 }
-                return true;
+                return true; 
             }
-            explode() {
-                if (this.isCinematic) {
+            explode() { 
+                if (this.isCinematic) { 
                     for (let i = 0; i < 280; i++) {
-                        particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
+                        particles.push(new SharpParticle(this.x, this.y, `#addbe6`, true));
                     }
                     // Mengubah parameter menjadi array untuk handle 2 baris
-                    setTimeout(() => createTextParticles(["YUSRIL","HW 🫶🏻✨"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["YUSRIL","HW 🫶🏻✨"], this.x, this.y, "#0000ff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);  
-                } else {
+                } else { 
                     for (let i = 0; i < 50; i++) {
                         particles.push(new SharpParticle(this.x, this.y, this.color));
                     }

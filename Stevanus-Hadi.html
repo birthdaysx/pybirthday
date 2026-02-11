@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stevanus Hadi</title> 
+    <title>Stevanus Hadi</title>
     
     <!-- Dependencies Index 2 -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -588,14 +588,13 @@
         <canvas class="sakura-canvas" id="sakura"></canvas>
 
         <!-- BACKGROUND STICKERS (Hiasan) -->
-        <!-- Kamu bisa ganti src="..." dengan link stiker Tenor yang kamu mau --> 
         <img src="https://birthdaysx.github.io/Foto2/st8.png" class="bg-sticker" style="top: 5%; left: 5%; animation-delay: 0s;">
         <img src="https://birthdaysx.github.io/Foto2/st3.png" class="bg-sticker" style="top: 5%; right: 5%; animation-delay: 1s;">
-        <img src="https://birthdaysx.github.io/Foto2/st4.png" class="bg-sticker" style="bottom: 5%; left: 5%; animation-delay: 2s;">
-        <img src="https://birthdaysx.github.io/Foto2/st5.png" class="bg-sticker" style="bottom: 5%; right: 5%; animation-delay: 0.5s;">
-        <img src="https://birthdaysx.github.io/Foto2/st6.png" class="bg-sticker" style="bottom: 2%; left: 50%; transform: translateX(-50%); animation-delay: 1.5s;">
+        <img src="https://birthdaysx.github.io/Foto2/st21.png" class="bg-sticker" style="bottom: 5%; left: 5%; animation-delay: 2s;">
+        <img src="https://birthdaysx.github.io/Foto2/st22.png" class="bg-sticker" style="bottom: 5%; right: 5%; animation-delay: 0.5s;">
+        <img src="https://birthdaysx.github.io/Foto2/st23.png" class="bg-sticker" style="bottom: 2%; left: 50%; transform: translateX(-50%); animation-delay: 1.5s;">
 
-        
+         
         <!-- PAGE 0: START --> 
         <div id="page0" class="page-container">
             <div class="glass-card">
@@ -608,16 +607,16 @@
                 </button>
             </div>
         </div>
- 
+
         <!-- PAGE 1: LOADING -->
         <div id="page1" class="page-container hidden-page">
-            <div class="glass-card"> 
-                <img src="https://birthdaysx.github.io/Foto2/st10.png" alt="Sticker" class="w- h-32 rounded-lg mb-3 relative z-10">
-                <h1 class="font-big text-2xl mb-1 relative z-10">A Birthday Moment</h1>
+            <div class="glass-card">
+                <img src="https://birthdaysx.github.io/Foto2/st12.png" alt="Sticker" class="w- h-32 rounded-lg mb- relative z-10">
+                <h1 class="font-big text-2xl mb-1 relative z-10">A Special Gift Moment</h1> 
                 <p class="font-small text-md mb-8 relative z-10">is being prepared for you...</p> 
                 
                 <div class="loading-bar-container mb-4">
-                    <div id="loader" class="loading-bar-fill"></div> 
+                    <div id="loader" class="loading-bar-fill"></div>
                 </div>
 
                 <div class="dot-loader space-x-2 relative z-10">
@@ -630,7 +629,7 @@
         <div id="page2" class="page-container hidden-page">
             <div class="glass-card">
                 <p class="font-small text-sm mb-2 relative z-10">Hi, I have something special for you</p>
-                <h2 class="font-big text-2xl mb-6 relative z-10">Happy Birthdayy!</h2>
+                <h2 class="font-big text-2xl mb-6 relative z-10">Special Gift!</h2>
                 
                 <!-- PINK THEME BOX -->
                 <div class="w-full p-4 bg-pink-500 rounded-2xl shadow-xl text-white relative mb-8 z-10">
@@ -647,15 +646,15 @@
             </div>
         </div>
 
-        <!-- PAGE 3: VALENTINE NOTE -->
+        <!-- PAGE 3: VALENTINE NOTE --> 
         <div id="page3" class="page-container hidden-page">
             <p class="font-small text-xl mb-1">Because today feels just right</p>
-            <h2 class="font-big text-3xl mb-6">A Birthday Note💙</h2> 
+            <h2 class="font-big text-3xl mb-6">A Special Note💙</h2> 
             
             <div class="w-full max-w-xs p-8 bg-pink-50 rounded-3xl border-4 border-pink-200 relative shadow-xl">
                 <img src="https://birthdaysx.github.io/Foto2/st9.png" class="absolute -top-5 -right-5 w- h-16" alt="stiker">
                 
-                <div id="envelope-wrapper" class="flex flex-col items-center py-6"> 
+                <div id="envelope-wrapper" class="flex flex-col items-center py-6">
                     <div class="envelope-emoji cursor-pointer hover:scale-110 transition-transform duration-300" onclick="openEnvelope()">📩</div>
                     <p class="text-pink-600 font-bold text-lg mb-3">Click the envelope!</p>
                     <div class="bg-white/50 border-2 border-pink-300 px-6 py-2 rounded-full text-pink-600 font-bold text-sm shadow-sm">
@@ -736,16 +735,20 @@
             </div>
         </div>
 
-        <!-- PAGE 5: GALLERY -->
+        <!-- PAGE 5: GALLERY --> 
         <div id="page5" class="page-container hidden-page">
             <h2 class="font-big text-3xl mb-4">Our Memories</h2> 
-            <div class="photo-grid mb-6"> 
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Memory 1"></div>
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Memory 2"></div>
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Memory 3"></div>
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Memory 4"></div>
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Memory 5"></div>
-            </div>
+            <div class="photo-grid mb-6">
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr1.jpeg" alt="Memory 1"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr2.jpeg" alt="Memory 2"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr3.jpeg" alt="Memory 3"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr4.jpeg" alt="Memory 4"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr5.jpeg" alt="Memory 5"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr6.jpeg" alt="Memory 6"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr7.jpeg" alt="Memory 7"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr8.jpeg" alt="Memory 8"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto2/rr9.jpeg" alt="Memory 9"></div>
+            </div> 
             <p class="italic text-xs text-pink-500 mb-4 px-10">"Scroll down to see all our moments."</p>
             <div class="flex space-x-4">
                 <button onclick="nextPage(4)" class="bg-white text-pink-500 border-2 border-pink-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
@@ -804,7 +807,7 @@
 
         <!-- PAGE 7: FINAL PAGE -->
         <div id="page7" class="page-container hidden-page">
-            <h2 class="font-big text-2xl mb-6">Happy Birthdayy!</h2>
+            <h2 class="font-big text-2xl mb-6">Special Gift!</h2>
             
             <div id="final-box" class="w-full max-w-xs p-6 bg-pink-50 rounded-2xl border-2 border-pink-200 shadow-xl">
                 <h3 class="font-bold text-pink-700 text-sm mb-3">Final Love Letter💌</h3>
@@ -1069,19 +1072,24 @@
 
         async function startParticleSequence() {
             mState = "SEQUENCE";
-            
-            // --- BAGIAN INI YANG DIRUBAH ---
-            // Langsung panggil 3 baris sekaligus (sebagai Array)
-            updateParticleTargets([
-                "Halo Sayangku",
-                "Stevanus Hadi",
-                "I really like your name and personality"
-            ]); 
-            
-            // Tunggu 5 detik biar sempet baca
-            await new Promise(r => setTimeout(r, 5000));  
-            // --------------------------------
 
+            // 1. Halo Sayangku
+            updateParticleTargets(["Halo","Sayangku"]);
+            await new Promise(r => setTimeout(r, 2000));
+
+            // 2. Stevanus Hadi
+            updateParticleTargets(["Stevanus","Hadi"]);
+            await new Promise(r => setTimeout(r, 2000));
+ 
+            // 3. I really like your name and personality
+            // Biar ga kekecilan di HP, kita break jadi 2 baris
+            updateParticleTargets(["I really","like your"]);
+            await new Promise(r => setTimeout(r, 2000)); 
+
+            updateParticleTargets(["name and","personality"]);
+            await new Promise(r => setTimeout(r, 3500)); 
+
+            // Efek ledakan sebelum masuk ke "You Are My Love"
             mIsExploding = true; 
             await new Promise(r => setTimeout(r, 1000));  
             mIsExploding = false;

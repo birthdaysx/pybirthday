@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HBD Istrikuu🤍</title>
-    <!-- Menambahkan link font Quicksand agar terbaca di canvas -->
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -14,22 +14,31 @@
             overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
-            /* Menghindari zoom otomatis saat klik cepat di iOS */
             touch-action: manipulation;
         }
 
-        /* Canvas sebagai background tetap */
-        #canvas {
+        /* --- CANVAS LAYERING --- */
+        #canvas-fireworks, #canvas-matrix {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        #canvas-fireworks {
             z-index: 1;
             display: none;
         }
 
-        /* Overlay halaman */
+        #canvas-matrix {
+            z-index: 2;
+            opacity: 0; /* Disembunyikan awalnya */
+            pointer-events: none; /* Agar tidak menghalangi klik di awal */
+        }
+
+        /* --- PAGES LAYERING --- */
         .page {
             position: fixed;
             top: 0;
@@ -41,20 +50,20 @@
             justify-content: center;
             align-items: center;
             z-index: 10;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s;
+            transition: opacity 1s ease-in-out, visibility 1s;
         }
 
-        /* Khusus halaman 3 agar bisa di-scroll */
         #page-3 {
-            position: absolute; /* Ganti fixed ke absolute agar bisa scroll */
+            position: absolute; 
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Mulai dari atas */
+            justify-content: flex-start;
             align-items: center;
             padding-bottom: 50px;
-            overflow-y: auto; /* Aktifkan scroll vertikal */
+            overflow-y: auto;
             background: rgba(0, 0, 0, 0.7);
+            z-index: 15;
         }
 
         .hidden {
@@ -63,7 +72,7 @@
             pointer-events: none;
         }
 
-        /* Halaman 1: Kado */
+        /* --- PAGE 1: KADO --- */
         #page-1 {
             background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
             z-index: 100;
@@ -98,10 +107,9 @@
             50% { transform: rotate(5deg) translateY(-20px); }
         }
 
-        /* Halaman 2: Kembang Api Overlay */
+        /* --- PAGE 2: FIREWORKS OVERLAY --- */
         #page-2 {
             pointer-events: auto;
-            /* Pastikan z-index cukup tinggi dan background transparan agar klik tembus */
             background: transparent;
         }
 
@@ -129,11 +137,11 @@
             box-shadow: 0 0 20px white;
         }
 
-        /* Container Galeri Foto */
+        /* --- PAGE 3: FOTO & PESAN --- */
         .photo-gallery {
             position: relative;
             width: 100%;
-            height: 600px; /* Area khusus foto */
+            height: 600px;
             flex-shrink: 0;
         }
 
@@ -164,7 +172,6 @@
             display: block;
         }
 
-        /* Penempatan foto agar tidak menumpuk di area pesan */
         .photo-1.reveal { top: 5%; left: 5%; transform: rotate(-10deg); }
         .photo-2.reveal { top: 8%; right: 5%; transform: rotate(8deg); }
         .photo-3.reveal { top: 35%; left: 8%; transform: rotate(5deg); }
@@ -175,7 +182,6 @@
             .photo-gallery { height: 500px; }
             .photo-item { width: 130px; }
             .photo-item img { height: 130px; }
-            /* Penyesuaian mobile agar tidak keluar layar */
             .photo-1.reveal { top: 5%; left: 5%; }
             .photo-2.reveal { top: 5%; right: 5%; }
             .photo-3.reveal { top: 35%; left: 5%; }
@@ -198,12 +204,10 @@
             opacity: 0;
             transform: scale(0.8) translateY(30px);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 20px; /* Jarak dari galeri */
+            margin-top: 20px; 
         }
 
-        #typing-text {
-            white-space: pre-wrap;
-}
+        #typing-text { white-space: pre-wrap; }
 
         .message-card.reveal {
             opacity: 1;
@@ -212,9 +216,26 @@
 
         .message-card h2 { color: #ff00de; margin-bottom: 15px; font-size: 1.8rem; }
         .message-card p { font-size: 1.05rem; line-height: 1.6; color: #fff; }
-        .restart-btn { margin-top: 25px; background: transparent; color: rgba(255,255,255,0.6); border: none; text-decoration: underline; cursor: pointer; }
+        
+        .transition-btn { 
+            margin-top: 25px; 
+            padding: 10px 20px;
+            background: #ff00de; 
+            color: white; 
+            border: none; 
+            border-radius: 20px;
+            cursor: pointer; 
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 0, 222, 0.5);
+            transition: all 0.3s;
+            opacity: 0; /* Muncul setelah teks selesai */
+        }
+        .transition-btn:hover {
+            background: white;
+            color: #ff00de;
+            box-shadow: 0 0 20px white;
+        }
 
-        /* Gaya untuk efek kursor mengetik */
         #typing-text::after {
             content: '|';
             animation: blink 0.7s infinite;
@@ -226,7 +247,6 @@
             50% { opacity: 0; }
         }
 
-        /* Hint Scroll untuk HP */
         .scroll-hint {
             color: rgba(255,255,255,0.5);
             font-size: 14px;
@@ -239,22 +259,78 @@
             40% {transform: translateY(-10px);}
             60% {transform: translateY(-5px);}
         }
+
+        /* Credit style (muncul di akhir matrix) */
+        #credit-text {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            z-index: 100;
+            display: none;
+            pointer-events: none;
+        }
+
+        /* --- LINK GAMBAR AKHIR --- */
+        #final-link {
+            position: fixed;
+            bottom: 15%; /* Jarak dari bawah layar */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.5s ease-in-out;
+            text-align: center;
+            text-decoration: none;
+        }
+        #final-link img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%; /* Membuat gambar jadi bundar */
+            border: 3px solid #ff00de; /* Warna border pink */
+            box-shadow: 0 0 20px rgba(255, 0, 222, 0.6);
+            transition: transform 0.3s;
+        }
+        #final-link:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 222, 1);
+        }
+        #final-link p {
+            color: white;
+            font-size: 14px;
+            margin-top: 10px;
+            text-shadow: 0 0 5px #ff00de;
+            animation: pulse 1s infinite alternate;
+        }
+        #final-link.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
-    <!-- SONG -->
+    <!-- LAGU (Hanya 1 tag audio dari awal sampai akhir) -->
     <audio id="birthday-music" loop preload="auto">
         <source src="https://birthdaysx.github.io/Musik/out-of-my-league.mp3" type="audio/mpeg">
     </audio>
 
-    <canvas id="canvas"></canvas>
+    <!-- Canvas 1: Kembang Api -->
+    <canvas id="canvas-fireworks"></canvas>
+    
+    <!-- Canvas 2: Efek Matrix (Kejutan Akhir) -->
+    <canvas id="canvas-matrix"></canvas>
  
+    <!-- HALAMAN 1 -->
     <div id="page-1" class="page">
         <h1>Happy Birthday!</h1>
         <button id="gift-button" aria-label="Buka Kado">🎁</button>
         <p style="color: #888; margin-top: 30px; letter-spacing: 1px;">Klik kado untuk kejutan</p>
     </div>
 
+    <!-- HALAMAN 2 -->
     <div id="page-2" class="page hidden">
         <div style="position: fixed; top: 20px; color: rgba(255,255,255,0.7); letter-spacing: 2px; font-size: 14px; animation: pulse 1s infinite alternate; pointer-events: none;">
             ✨ Klik layar untuk Wishes ✨
@@ -262,7 +338,7 @@
         <button id="next-page-btn">Lihat Pesan Spesial ✨</button> 
     </div>
 
-    <!-- FOTO -->
+    <!-- HALAMAN 3 -->
     <div id="page-3" class="page hidden">
         <div class="photo-gallery">
             <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto2/yy1.jpeg" alt="Momen 1"></div>
@@ -274,50 +350,70 @@
 
         <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya zezeyy.. 👇</div>
   
-    <!-- NAMA YG ULTAH -->
         <div class="message-card" id="message-card"> 
             <h2>HAPPY BIRTHDAY<br>ZEZEYY🤍</h2>
-            <!-- Teks dikosongkan untuk diisi animasi mengetik -->
             <p id="typing-text"></p>
-    <!-- PENGIRIM --> 
             <p style="font-style: italic; margin-top: 15px;">From Ongjeyy</p>
-            <button class="restart-btn" onclick="location.reload()">Mulai Lagi</button>
+            <!-- Tombol Transisi ke Matrix -->
+            <button class="transition-btn" id="to-matrix-btn">Ada satu kejutan lagi...</button>
         </div>
     </div>
 
+    <div id="credit-text">by fazescript</div>
+
+    <!-- ELEMEN GAMBAR LINK (MUNCUL DI AKHIR MATRIX) -->
+    <!-- Ganti href dengan link tujuan (misal: link WhatsApp atau YouTube) -->
+    <a id="final-link" href="https://open.spotify.com/track/6VgyRGeR4cw6yNGazjGFhu?si=0-4N8iEyT6e3Vx7NfQdzKg" target="_blank" title="Klik untuk menuju link">
+        <!-- Ganti src dengan link gambar yang kamu inginkan -->
+        <img src="https://birthdaysx.github.io/Foto2/yy1.jpeg" alt="Klik Gambar Ini">
+        <p>Klik Gambar Ini ✨</p>
+    </a>
+
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const page1 = document.getElementById('page-1');
-        const page2 = document.getElementById('page-2');
-        const page3 = document.getElementById('page-3');
-        const giftButton = document.getElementById('gift-button');
-        const nextPageBtn = document.getElementById('next-page-btn');
-        const messageCard = document.getElementById('message-card');
-        const photoItems = document.querySelectorAll('.photo-item');
-        const scrollHint = document.getElementById('scroll-hint');
+        /* =========================================
+           SETUP GLOBAL & CANVAS
+           ========================================= */
+        const canvasFw = document.getElementById('canvas-fireworks');
+        const ctxFw = canvasFw.getContext('2d');
+        
+        const canvasM = document.getElementById('canvas-matrix');
+        const ctxM = canvasM.getContext('2d');
 
         let width, height;
-        let particles = [];
-        let lasers = [];
-        let isStarted = false;
-        let cinematicDone = false;
- 
-        // MESSAGE CARD
-        const messageToType = "Selamat ulang tahun,for ongki to zezeyy🥰🥰🐳\n"+"Semoga di umur yang baru ini, semua langkah kamu selalu dikelilingi hal baik dan bahagia. terima kasih sudah jadi seseorang yang selalu bikin hari ongki terasa lebih hangat. semoga senyummu nggak pernah hilang, mimpimu satu per satu tercapai, dan hatimu selalu kuat menghadapi apa pun.  \n\n"+"Hari ini tentang kamu  tentang semua hal indah yang kamu bawa ke dunia. Tetap jadi zezey yang manis, tulus, dan spesial ya. semoga tahun ini penuh cerita cantik yang bisa kamu kenang selamanya 🤍";
- 
-        // DAFTAR UCAPAN (WISHES) 
-        const wishes = ["FOR ONGJEYY",["HAPPY BIRTHDAY","CANTIK🤍"],"SEHAT SELALU","PANJANG UMUR",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES","BAHAGIA TERUS"];
-        let wishIndex = 0;
+
+        // Kontrol Status Main Loop & Matrix State (Pindahkan ke atas agar tidak ada ReferenceError saat resize)
+        let runFireworks = false;
+        let runMatrix = false;
+        let m_state = "SWEEP"; 
 
         function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvasFw.width = width;
+            canvasFw.height = height;
+            canvasM.width = width;
+            canvasM.height = height;
+            
+            // Re-init variables untuk matrix kalau diresize
+            if(runMatrix && m_state !== "SWEEP" && typeof initMatrixCanvas === 'function') {
+                initMatrixCanvas();
+            }
         }
         window.addEventListener('resize', resize); 
         resize();
 
         const random = (min, max) => Math.random() * (max - min) + min;
+
+        /* =========================================
+           BAGIAN 1: LOGIKA KEMBANG API (FIREWORKS)
+           ========================================= */
+        let fw_particles = [];
+        let fw_lasers = [];
+        let fw_cinematicDone = false;
+ 
+        const messageToType = "Selamat ulang tahun, for ongki to zezeyy🥰🥰🐳\n"+"Semoga di umur yang baru ini, semua langkah kamu selalu dikelilingi hal baik dan bahagia. terima kasih sudah jadi seseorang yang selalu bikin hari ongki terasa lebih hangat. semoga senyummu nggak pernah hilang, mimpimu satu per satu tercapai, dan hatimu selalu kuat menghadapi apa pun.\n\n"+"Hari ini tentang kamu, tentang semua hal indah yang kamu bawa ke dunia. Tetap jadi zezey yang manis, tulus, dan spesial ya. semoga tahun ini penuh cerita cantik yang bisa kamu kenang selamanya 🤍";
+        const wishes = ["FOR ONGJEYY",["HAPPY BIRTHDAY","CANTIK🤍"],"SEHAT SELALU","PANJANG UMUR",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES","BAHAGIA TERUS"];
+        let wishIndex = 0;
 
         class SharpParticle {
             constructor(x, y, color, isBig = false, targetX = null, targetY = null) {
@@ -334,19 +430,18 @@
                 this.friction = 0.94;
                 this.gravity = (targetX !== null) ? 0 : 0.025;
                 this.opacity = 1;
-                // Wishes dibuat awet (0.002) agar tidak cepat hilang
                 this.decay = (targetX !== null) ? 0.0001 : (isBig ? random(0.0015, 0.012) : random(0.015, 0.03));
             }
             draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - (this.velocity.x * 3), this.y - (this.velocity.y * 3));
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
-                ctx.restore();
+                ctxFw.save();
+                ctxFw.globalAlpha = this.opacity;
+                ctxFw.beginPath();
+                ctxFw.moveTo(this.x, this.y);
+                ctxFw.lineTo(this.x - (this.velocity.x * 3), this.y - (this.velocity.y * 3));
+                ctxFw.strokeStyle = this.color;
+                ctxFw.lineWidth = 1.5;
+                ctxFw.stroke();
+                ctxFw.restore();
             }
             update() {
                 if(this.targetX !== null) {
@@ -380,14 +475,14 @@
                 this.color = isCinematic ? '#ff4500' : `hsl(${this.hue}, 100%, 70%)`;
             }
             draw() {
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - this.velocityUnit.x * this.speed * 4, this.y - this.velocityUnit.y * this.speed * 4);
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = this.isCinematic ? 3 : 1;
-                ctx.stroke();
-                ctx.restore();
+                ctxFw.save();
+                ctxFw.beginPath();
+                ctxFw.moveTo(this.x, this.y);
+                ctxFw.lineTo(this.x - this.velocityUnit.x * this.speed * 4, this.y - this.velocityUnit.y * this.speed * 4);
+                ctxFw.strokeStyle = this.color;
+                ctxFw.lineWidth = this.isCinematic ? 3 : 1;
+                ctxFw.stroke();
+                ctxFw.restore();
             }
             update() {
                 this.speed *= this.acceleration;
@@ -402,15 +497,14 @@
             explode() {
                 if (this.isCinematic) {
                     for (let i = 0; i < 280; i++) {
-                        particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
+                        fw_particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
-                    // Mengubah parameter menjadi array untuk handle 2 baris
                     setTimeout(() => createTextParticles("ZEZEYY", this.x, this.y, "#ffffff"), 1);
-                    cinematicDone = true;
-                    setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);  
+                    fw_cinematicDone = true;
+                    setTimeout(() => { document.getElementById('next-page-btn').style.display = 'block'; }, 5000);  
                 } else {
                     for (let i = 0; i < 50; i++) {
-                        particles.push(new SharpParticle(this.x, this.y, this.color));
+                        fw_particles.push(new SharpParticle(this.x, this.y, this.color));
                     }
                 }
             }
@@ -420,14 +514,13 @@
             const tempCanvas = document.createElement('canvas');
             const tCtx = tempCanvas.getContext('2d');
             tempCanvas.width = 600;
-            tempCanvas.height = 200; // Tinggi diperbesar untuk 2 baris
+            tempCanvas.height = 200; 
             
             tCtx.fillStyle = 'red'; 
             tCtx.font = "bold 50px 'Quicksand', sans-serif";
             tCtx.textAlign = 'center';
             tCtx.textBaseline = 'middle';
 
-            // Logika untuk merender teks (mendukung string tunggal atau array untuk 2 baris)
             if (Array.isArray(text)) {
                 tCtx.fillText(text[0], 300, 60);
                 tCtx.fillText(text[1], 300, 120);
@@ -441,39 +534,358 @@
                     if (data[(y * 600 + x) * 4 + 3] > 128) {
                         const tx = centerX + (x - 300);
                         const ty = centerY + (y - 100);
-                        particles.push(new SharpParticle(centerX, centerY, color, true, tx, ty));
+                        fw_particles.push(new SharpParticle(centerX, centerY, color, true, tx, ty));
                     }
                 }
             }
         }
 
-        function animate() {
-            if (!isStarted) return;
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-            ctx.fillRect(0, 0, width, height);
+        function animateFireworks() {
+            if (!runFireworks) return;
+            ctxFw.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctxFw.fillRect(0, 0, width, height);
 
-            lasers = lasers.filter(l => {
+            fw_lasers = fw_lasers.filter(l => {
                 l.draw();
                 return l.update();
             });
 
-            particles = particles.filter(p => {
+            fw_particles = fw_particles.filter(p => {
                 p.draw();
                 p.update();
                 return p.opacity > 0;
             });
 
-            if (cinematicDone && lasers.length === 0) {
-                lasers.push(new Laser(random(width * 0.1, width * 0.9), random(height * 0.1, height * 0.4)));
+            if (fw_cinematicDone && fw_lasers.length === 0) {
+                fw_lasers.push(new Laser(random(width * 0.1, width * 0.9), random(height * 0.1, height * 0.4)));
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateFireworks);
         }
 
+        /* =========================================
+           BAGIAN 2: LOGIKA MATRIX & HEART (KEJUTAN)
+           ========================================= */
+        let m_particles = [];
+        let m_rippleParticles = []; 
+        let m_drops = []; 
+        let m_speeds = []; 
+        let m_gridChars = []; 
+        const m_fontSize = 14; 
+        const m_loveLetters = "ILOVEYOU".split(""); 
+        let m_columns, m_rows;
+        let m_frames = 0;
+        
+        let m_sweepProgress = 0; 
+        let m_isExploding = false;
+        let m_rainStarted = false; 
+        let m_textOpacity = 0; 
+
+        class MatrixParticle {
+            constructor(targetX, targetY, type = "normal") {
+                const centerX = width / 2;
+                const centerY = height / 2;
+
+                if (type === "ripple") {
+                    const startScale = 0.75; 
+                    this.x = centerX + (targetX - centerX) * startScale;
+                    this.y = centerY + (targetY - centerY) * startScale;
+                    this.size = Math.random() * 2 + 2.5; 
+                } else {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 1.0;
+                }
+                
+                this.destX = targetX;
+                this.destY = targetY;
+                
+                this.color = (type === "ripple") ? "255, 105, 200" : "255, 255, 255"; 
+                this.active = true;
+                this.opacity = (type === "ripple") ? 0 : 1.0;
+                this.type = type; 
+
+                this.progress = 0;
+                this.speed = 0.015 + Math.random() * 0.02; 
+                
+                this.driftX = (Math.random() - 0.5) * 0.4;
+                this.driftY = (Math.random() - 0.5) * 0.4;
+                this.noiseOffset = Math.random() * 2000;
+                this.stayTime = 40; 
+                
+                this.vx = 0;
+                this.vy = 0;
+            }
+
+            update() {
+                if (this.type === "ripple") {
+                    if (this.progress < 1) {
+                        this.progress += this.speed;
+                        const startScale = 0.75;
+                        const centerX = width / 2;
+                        const centerY = height / 2;
+                        const startX = centerX + (this.destX - centerX) * startScale;
+                        const startY = centerY + (this.destY - centerY) * startScale;
+                        this.x = startX + (this.destX - startX) * this.progress;
+                        this.y = startY + (this.destY - startY) * this.progress;
+                        this.opacity = Math.min(this.progress * 4, 1);
+                    } else {
+                        this.x = this.destX + Math.sin(m_frames * 0.1 + this.noiseOffset) * 0.8;
+                        this.y = this.destY + Math.cos(m_frames * 0.1 + this.noiseOffset) * 0.8;
+                        this.stayTime--;
+                        this.opacity = this.stayTime / 40;
+                        if (this.stayTime <= 0) this.active = false;
+                    }
+                } else if (m_isExploding) {
+                    if (this.vx === 0 && this.vy === 0) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const force = Math.random() * 15 + 12; 
+                        this.vx = Math.cos(angle) * force;
+                        this.vy = Math.sin(angle) * force;
+                    }
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vx *= 0.985;
+                    this.vy *= 0.985;
+                } else if (m_state === "FINISHED" || m_state === "FINAL_HEART") {
+                    if (this.opacity > 0.25) this.opacity -= 0.005;
+                    this.x += this.driftX + Math.sin(m_frames * 0.02 + this.noiseOffset) * 0.15;
+                    this.y += this.driftY + Math.cos(m_frames * 0.02 + this.noiseOffset) * 0.15;
+                    this.vx = 0; this.vy = 0;
+                } else {
+                    let dx = this.destX - this.x;
+                    let dy = this.destY - this.y;
+                    this.x += dx * 0.07;
+                    this.y += dy * 0.07;
+                    this.vx = 0; this.vy = 0;
+                }
+            }
+
+            draw() {
+                if (!this.active || this.opacity <= 0) return;
+                ctxM.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+                if (this.type === "ripple") {
+                    this.drawHeart(this.x, this.y, this.size * 2.8); 
+                } else {
+                    ctxM.beginPath();
+                    ctxM.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctxM.fill();
+                }
+            }
+
+            drawHeart(x, y, size) {
+                ctxM.beginPath();
+                ctxM.moveTo(x, y + size / 4);
+                ctxM.bezierCurveTo(x, y, x - size / 2, y, x - size / 2, y + size / 4);
+                ctxM.bezierCurveTo(x - size / 2, y + size / 2, x, y + size * 0.75, x, y + size);
+                ctxM.bezierCurveTo(x, y + size * 0.75, x + size / 2, y + size / 2, x + size / 2, y + size / 4);
+                ctxM.bezierCurveTo(x + size / 2, y, x, y, x, y + size / 4);
+                ctxM.fill();
+            }
+        }
+
+        function initMatrixCanvas() {
+            m_columns = Math.ceil(width / m_fontSize);
+            m_rows = Math.ceil(height / m_fontSize);
+            
+            m_drops = []; m_speeds = []; m_gridChars = [];
+            for (let i = 0; i < m_columns; i++) {
+                m_drops[i] = -Math.random() * 20; 
+                m_speeds[i] = 0.1 + Math.random() * 0.3; 
+                m_gridChars[i] = [];
+                for (let j = 0; j < m_rows; j++) {
+                    m_gridChars[i][j] = m_loveLetters[Math.floor(Math.random() * m_loveLetters.length)];
+                }
+            }
+        }
+
+        function getHeartOutlinePoints(count) {
+            const points = [];
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const scale = Math.min(width, height) / 45; 
+
+            for (let i = 0; i < count; i++) {
+                const t = (i / count) * Math.PI * 2;
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+                points.push({
+                    x: centerX + x * scale,
+                    y: centerY + y * scale
+                });
+            }
+            return points;
+        }
+
+        function getTextPoints(text) {
+            const points = [];
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = width;
+            tempCanvas.height = height;
+            
+            const isTransition = isNaN(text) && text.length <= 4 || text.length === 1;
+            let tSize;
+            if (isTransition) {
+                tSize = !isNaN(text) ? Math.min(width / 2.2, 400) : Math.min(width / 3.5, 250);
+            } else {
+                tSize = Math.min(width / 4, 180);
+            }
+
+            tempCtx.font = `bold ${tSize}px Arial`;
+            tempCtx.textAlign = 'center';
+            tempCtx.textBaseline = 'middle';
+            tempCtx.fillStyle = 'white';
+            tempCtx.fillText(text, width / 2, height / 2);
+            
+            const data = tempCtx.getImageData(0, 0, width, height).data;
+            for (let y = 0; y < height; y += 10) {
+                for (let x = 0; x < width; x += 10) {
+                    if (data[(y * width + x) * 4 + 3] > 128) points.push({ x, y });
+                }
+            }
+            return points;
+        }
+
+        function updateParticleTargets(text) {
+            const newPoints = getTextPoints(text);
+            for (let i = 0; i < Math.max(m_particles.length, newPoints.length); i++) {
+                if (i < newPoints.length) {
+                    if (i < m_particles.length) {
+                        m_particles[i].destX = newPoints[i].x;
+                        m_particles[i].destY = newPoints[i].y;
+                        m_particles[i].active = true;
+                    } else {
+                        m_particles.push(new MatrixParticle(newPoints[i].x, newPoints[i].y));
+                    }
+                } else if (m_particles[i]) {
+                    m_particles[i].active = false;
+                }
+            }
+        }
+
+        let m_rippleTimer = 0;
+        function createHeartRipple() {
+            if (m_rippleTimer % 20 === 0) {
+                const outline = getHeartOutlinePoints(150); 
+                outline.forEach(pt => {
+                    m_rippleParticles.push(new MatrixParticle(pt.x, pt.y, "ripple"));
+                });
+            }
+            m_rippleTimer++;
+        }
+
+        async function startParticleSequence() {
+            m_state = "SEQUENCE";
+            const countdown = ["Halo", "Istriku", "Zezeyy"]; 
+            for (let text of countdown) {
+                updateParticleTargets(text); 
+                await new Promise(r => setTimeout(r, 3500)); 
+            } 
+            m_isExploding = true;
+            await new Promise(r => setTimeout(r, 2200));
+            m_isExploding = false;
+
+            const finalWords = ["You", "Are", "My", "Love"];
+            for (let word of finalWords) {
+                updateParticleTargets(word);
+                await new Promise(r => setTimeout(r, 2000));
+            }
+            m_isExploding = true;
+            await new Promise(r => setTimeout(r, 800)); 
+            m_isExploding = false;
+            
+            m_state = "FINAL_HEART";
+            document.getElementById('credit-text').style.display = 'block'; // Tampilkan credit
+
+            // TAMPILKAN GAMBAR LINK SETELAH 1.5 DETIK
+            setTimeout(() => {
+                document.getElementById('final-link').classList.add('show');
+            }, 1500); 
+        }
+
+        function drawMatrixGrid() {
+            ctxM.fillStyle = "rgba(0, 0, 0, 0.25)";
+            ctxM.fillRect(0, 0, width, height);
+            ctxM.font = m_fontSize + "px monospace";
+            
+            if (m_state === "SWEEP") {
+                m_sweepProgress += 0.45; 
+                if (m_sweepProgress >= m_rows * 0.7) m_rainStarted = true;
+                if (m_sweepProgress >= m_rows + 15) {
+                    m_state = "WAITING";
+                    startParticleSequence();
+                }
+                
+                const currentLimit = Math.floor(m_sweepProgress);
+                for (let i = 0; i < m_columns; i++) {
+                    for (let j = 0; j <= currentLimit && j < m_rows; j++) {
+                        const distFromEdge = currentLimit - j;
+                        if (distFromEdge < 15) {
+                            const op = 1 - (distFromEdge / 15);
+                            ctxM.fillStyle = `rgba(255, 105, 180, ${op * 0.6})`;
+                            ctxM.fillText(m_gridChars[i][j], i * m_fontSize, j * m_fontSize);
+                        }
+                    }
+                }
+            }
+            
+            if (m_rainStarted) {
+                for (let i = 0; i < m_columns; i++) {
+                    m_drops[i] += m_speeds[i];
+                    if (m_drops[i] > m_rows && Math.random() > 0.985) m_drops[i] = 0;
+                    const currentRow = Math.floor(m_drops[i]);
+                    for (let j = 0; j < 10; j++) {
+                        const r = currentRow - j;
+                        if (r >= 0 && r < m_rows) {
+                            ctxM.fillStyle = `rgba(255, 105, 180, ${0.2 * (1 - j/10)})`;
+                            ctxM.fillText(m_gridChars[i][r], i * m_fontSize, r * m_fontSize);
+                        }
+                    }
+                }
+            }
+        }
+
+        function drawFinalText() {
+            if (m_state === "FINAL_HEART") {
+                if (m_textOpacity < 1) m_textOpacity += 0.01;
+                ctxM.font = `bold ${Math.min(width / 24, 26)}px "Comic Sans MS", cursive`;
+                ctxM.textAlign = 'center'; ctxM.textBaseline = 'middle';
+                ctxM.fillStyle = `rgba(255, 255, 255, ${m_textOpacity})`;
+                ctxM.fillText("I LOVE YOU SAYANG❤️", width / 2, height / 2);
+            }
+        }
+
+        function animateMatrix() {
+            if (!runMatrix) return;
+            drawMatrixGrid();
+            
+            if (m_state !== "SWEEP") {
+                m_particles.forEach(p => { p.update(); p.draw(); });
+            }
+            
+            if (m_state === "FINAL_HEART") {
+                createHeartRipple();
+                for (let i = m_rippleParticles.length - 1; i >= 0; i--) {
+                    m_rippleParticles[i].update();
+                    if (!m_rippleParticles[i].active) m_rippleParticles.splice(i, 1);
+                    else m_rippleParticles[i].draw();
+                }
+                drawFinalText();
+            }
+            
+            m_frames++;
+            requestAnimationFrame(animateMatrix);
+        }
+
+        /* =========================================
+           BAGIAN 3: ALUR INTERAKSI & TRANSISI
+           ========================================= */
+
         // Fungsi Animasi Mengetik
-        function typeWriter(text, elementId, speed) {
+        function typeWriter(text, elementId, speed, callback) {
             let i = 0;
             const element = document.getElementById(elementId);
-            element.innerHTML = ""; // Pastikan kosong
+            element.innerHTML = ""; 
             
             function type() {
                 if (i < text.length) {
@@ -481,60 +893,96 @@
                     i++;
                     setTimeout(type, speed);
                 } else {
-                    // Hilangkan kursor setelah selesai mengetik (opsional)
-                    // element.style.borderRight = "none";
+                    if(callback) callback();
                 }
             }
             type();
         }
 
-        giftButton.addEventListener('click', () => {
+        // TAHAP 1: BUKA KADO
+        document.getElementById('gift-button').addEventListener('click', () => {
             const music = document.getElementById('birthday-music');
             music.play().catch(error => console.log("Musik diblokir browser:", error));
-            page1.classList.add('hidden');
-            canvas.style.display = 'block';
-            page2.classList.remove('hidden');
-            isStarted = true;
+            
+            document.getElementById('page-1').classList.add('hidden');
+            
+            // Mulai Fireworks
+            canvasFw.style.display = 'block';
+            document.getElementById('page-2').classList.remove('hidden');
+            
+            runFireworks = true;
             setTimeout(() => {
-                lasers.push(new Laser(width / 2, height * 0.25, true));
-                animate();
+                fw_lasers.push(new Laser(width / 2, height * 0.25, true));
+                animateFireworks();
             }, 500);
         });
 
-        // PERBAIKAN UNTUK iOS: Menggunakan pointerdown agar kompatibel dengan touch dan mouse
+        // Event Klik Layar untuk memunculkan harapan saat kembang api
         window.addEventListener('pointerdown', (e) => {
-            if (cinematicDone && isStarted && e.target.id !== 'next-page-btn') {
+            if (runFireworks && fw_cinematicDone && e.target.id !== 'next-page-btn' && e.target.id !== 'to-matrix-btn') {
                 const text = wishes[wishIndex];
                 const randomColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
-                
-                const clickX = e.clientX;
-                const clickY = e.clientY;
-                
-                createTextParticles(text, clickX, clickY, randomColor);
+                createTextParticles(text, e.clientX, e.clientY, randomColor);
                 wishIndex = (wishIndex + 1) % wishes.length;
             }
         }, { passive: true });
 
-        nextPageBtn.onclick = (e) => {
+        // TAHAP 2: PINDAH KE FOTO DAN PESAN
+        document.getElementById('next-page-btn').onclick = (e) => {
             e.stopPropagation(); 
-            page2.classList.add('hidden');
-            page3.classList.remove('hidden');
+            document.getElementById('page-2').classList.add('hidden');
+            document.getElementById('page-3').classList.remove('hidden');
             document.body.style.overflowY = "auto";
             
+            // Animasi foto muncul
+            const photoItems = document.querySelectorAll('.photo-item');
             photoItems.forEach((item, i) => {
                 setTimeout(() => item.classList.add('reveal'), i * 300);
             });
 
+            // Animasi Kartu Pesan dan Ngetik
             setTimeout(() => {
-                messageCard.classList.add('reveal');
-                if(window.innerWidth < 768) scrollHint.style.display = 'block';
+                document.getElementById('message-card').classList.add('reveal');
+                if(window.innerWidth < 768) document.getElementById('scroll-hint').style.display = 'block';
                 
-                // Jalankan animasi mengetik setelah kartu pesan muncul
                 setTimeout(() => {
-                    typeWriter(messageToType, "typing-text", 50);
+                    typeWriter(messageToType, "typing-text", 50, () => {
+                        // Munculkan tombol ke matrix SETELAH teks selesai diketik
+                        const toMatrixBtn = document.getElementById('to-matrix-btn');
+                        toMatrixBtn.style.opacity = '1';
+                    });
                 }, 800);
             }, 1800);
         };
+
+        // TAHAP 3: TRANSISI KE MATRIX
+        document.getElementById('to-matrix-btn').onclick = (e) => {
+            e.stopPropagation();
+            
+            // 1. Fade out halaman pesan dan foto
+            document.getElementById('page-3').style.opacity = '0';
+            
+            // 2. Fade out layer kembang api, Fade in layer matrix
+            canvasFw.style.opacity = '0';
+            canvasM.style.opacity = '1';
+            canvasM.style.pointerEvents = 'auto'; // Agar bisa diklik kalau perlu
+            
+            // Mencegah scroll
+            document.body.style.overflowY = "hidden";
+
+            setTimeout(() => {
+                // Sembunyikan elemen lama sepenuhnya agar tidak membebani memori
+                document.getElementById('page-3').style.display = 'none';
+                runFireworks = false; // Matikan loop animasi kembang api
+                canvasFw.style.display = 'none';
+                
+                // Mulai sequence Matrix
+                initMatrixCanvas();
+                runMatrix = true;
+                animateMatrix();
+            }, 1500); // Tunggu sampai transisi CSS (fade out) selesai
+        };
+
     </script>
 </body>
 </html>

@@ -267,11 +267,11 @@
         <button id="next-page-btn">Lihat Pesan Spesial ✨</button>
     </div>
 
-    <!-- FOTO -->
+    <!-- FOTO --> 
     <div id="page-3" class="page hidden">
         <div class="photo-gallery">
             <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto2/nnn1.jpeg" alt="Momen 1"></div>
-            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto2/ccc2.jpeg" alt="Momen 2"></div>
+            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto2/nnn2.jpeg" alt="Momen 2"></div>
             
             <!-- VIDEO 1 (Posisi ke-3) -->
             <div class="photo-item photo-3">
@@ -418,12 +418,12 @@
                 return true;
             }
             explode() {
-                if (this.isCinematic) {
+                if (this.isCinematic) { 
                     for (let i = 0; i < 280; i++) {
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
                     // Mengubah parameter menjadi array untuk handle 2 baris
-                    setTimeout(() => createTextParticles(["MY","SADAM"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["ABANG","HABIB"], this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);  
                 } else {

@@ -374,7 +374,7 @@
                 this.isCinematic = isCinematic;
                 const angle = Math.atan2(targetY - this.y, targetX - this.x);
                 this.speed = isCinematic ? 0.01 : 2.5;             
-                this.acceleration = isCinematic ? 1.013       : 1.1; 
+                this.acceleration = isCinematic ? 1.026   : 1.1; 
                 this.velocityUnit = { x: Math.cos(angle), y: Math.sin(angle) };
                 this.hue = isCinematic ? 0 : random(0, 360);
                 this.color = isCinematic ? '#ff4500' : `hsl(${this.hue}, 100%, 70%)`;

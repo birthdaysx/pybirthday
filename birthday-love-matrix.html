@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBD Istrikuu🤍</title>
+    <title>Happy Birthday🤍</title>
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -341,19 +341,19 @@
     <!-- HALAMAN 3 -->
     <div id="page-3" class="page hidden">
         <div class="photo-gallery">
-            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto2/yy1.jpeg" alt="Momen 1"></div>
-            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto2/yy2.jpeg" alt="Momen 2"></div>
-            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto2/yy3.jpeg" alt="Momen 3"></div>
-            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto2/yy4.jpeg" alt="Momen 4"></div>
-            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto2/yy5.jpeg" alt="Momen 5"></div>
+            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto/pp1.jpeg" alt="Momen 1"></div>
+            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto/pp2.jpeg" alt="Momen 2"></div>
+            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto/pp3.jpeg" alt="Momen 3"></div>
+            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto/pp4.jpeg" alt="Momen 4"></div>
+            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto/pp5.jpeg" alt="Momen 5"></div>
         </div> 
 
-        <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya zezeyy.. 👇</div>
+        <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya sayangg.. 👇</div>
   
         <div class="message-card" id="message-card"> 
-            <h2>HAPPY BIRTHDAY<br>ZEZEYY🤍</h2>
+            <h2>HAPPY BIRTHDAY<br>Sayangg🤍</h2>
             <p id="typing-text"></p>
-            <p style="font-style: italic; margin-top: 15px;">From Ongjeyy</p>
+            <p style="font-style: italic; margin-top: 15px;">From boyfriend</p>
             <!-- Tombol Transisi ke Matrix -->
             <button class="transition-btn" id="to-matrix-btn">Ada satu kejutan lagi...</button>
         </div>
@@ -411,8 +411,8 @@
         let fw_lasers = [];
         let fw_cinematicDone = false;
  
-        const messageToType = "Selamat ulang tahun, for ongki to zezeyy🥰🥰🐳\n"+"Semoga di umur yang baru ini, semua langkah kamu selalu dikelilingi hal baik dan bahagia. terima kasih sudah jadi seseorang yang selalu bikin hari ongki terasa lebih hangat. semoga senyummu nggak pernah hilang, mimpimu satu per satu tercapai, dan hatimu selalu kuat menghadapi apa pun.\n\n"+"Hari ini tentang kamu, tentang semua hal indah yang kamu bawa ke dunia. Tetap jadi zezey yang manis, tulus, dan spesial ya. semoga tahun ini penuh cerita cantik yang bisa kamu kenang selamanya 🤍";
-        const wishes = ["FOR ONGJEYY",["HAPPY BIRTHDAY","CANTIK🤍"],"SEHAT SELALU","PANJANG UMUR",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES","BAHAGIA TERUS"];
+        const messageToType = "Happy birthday contoh🤍";
+        const wishes = ["FOR ",["HAPPY BIRTHDAY","CANTIK🤍"],"SEHAT SELALU","PANJANG UMUR",["WISH YOU","ALL THE BEST"], "MAKIN SUKSES","BAHAGIA TERUS"];
         let wishIndex = 0;
 
         class SharpParticle {
@@ -499,11 +499,11 @@
                     for (let i = 0; i < 280; i++) {
                         fw_particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
-                    setTimeout(() => createTextParticles("ZEZEYY", this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles("Happy Birthday", this.x, this.y, "#ffffff"), 1);
                     fw_cinematicDone = true;
                     setTimeout(() => { document.getElementById('next-page-btn').style.display = 'block'; }, 5000);  
                 } else {
-                    for (let i = 0; i < 50; i++) {
+                    for (let i = 0; i < 50; i++) { 
                         fw_particles.push(new SharpParticle(this.x, this.y, this.color));
                     }
                 }
@@ -776,7 +776,7 @@
 
         async function startParticleSequence() {
             m_state = "SEQUENCE";
-            const countdown = ["Halo", "Istriku", "Zezeyy"]; 
+            const countdown = ["Halo", "sayangku", "DOI"]; 
             for (let text of countdown) {
                 updateParticleTargets(text); 
                 await new Promise(r => setTimeout(r, 3500)); 

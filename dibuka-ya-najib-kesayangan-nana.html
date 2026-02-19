@@ -797,9 +797,9 @@
             tempCtx.fillText(text, width / 2, height / 2);
             
             const data = tempCtx.getImageData(0, 0, width, height).data;
-            for (let y = 0; y < height; y += 10) {
-                for (let x = 0; x < width; x += 10) {
-                    if (data[(y * width + x) * 4 + 3] > 128) points.push({ x, y });
+            for (let y = 0; y < height; y += 5) {
+                for (let x = 0; x < width; x += 5) {
+                    if (data[(y * width + x) * 4 + 3] > 128) points.push({ x, y }); 
                 }
             }
             return points;
@@ -835,16 +835,16 @@
 
         async function startParticleSequence() {
             m_state = "SEQUENCE";
-            const countdown = ["Halo", "sayangku", "DOI"]; 
+            const countdown = ["3", "2", "1"]; 
             for (let text of countdown) {
                 updateParticleTargets(text); 
-                await new Promise(r => setTimeout(r, 3500)); 
+                await new Promise(r => setTimeout(r, 2000)); 
             } 
             m_isExploding = true;
-            await new Promise(r => setTimeout(r, 2200));
+            await new Promise(r => setTimeout(r, 2200)); 
             m_isExploding = false;
 
-            const finalWords = ["You", "Are", "My", "Love"];
+            const finalWords = ["I", "Hope", "You'll", "Be", "My", "Now", "And", "Forever"];
             for (let word of finalWords) {
                 updateParticleTargets(word);
                 await new Promise(r => setTimeout(r, 2000));

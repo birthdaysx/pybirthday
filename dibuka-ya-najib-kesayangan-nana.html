@@ -127,7 +127,7 @@
             transition: opacity 1s ease-in;
         }
 
-        #next-page-btn {  
+        #next-page-btn { 
             position: fixed;
             bottom: 50px;
             padding: 15px 30px;
@@ -155,8 +155,11 @@
         .photo-gallery {
             position: relative;
             width: 100%;
+            /* UBAH: Max width agar di laptop tidak terlalu menyebar */
+            max-width: 900px; 
             height: 600px;
             flex-shrink: 0;
+            margin: 0 auto; /* Tengah secara horizontal */
         }
 
         .photo-item {
@@ -169,7 +172,7 @@
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), z-index 0.1s, opacity 0.5s, top 0.5s;
             z-index: 11;
             opacity: 0;
-            top: 120%; 
+            top: 120%; /* Posisi awal di bawah layar */
         }
 
         .photo-item.reveal { opacity: 1; }
@@ -179,6 +182,11 @@
             z-index: 50;
         }
 
+        /* FIX: Tambahkan rule khusus untuk foto ke-5 agar tetap di tengah saat di-hover */
+        .photo-5:hover {
+            transform: translateX(-50%) scale(1.1) rotate(0deg) !important;
+        }
+
         .photo-item img {
             width: 100%;
             height: 180px;
@@ -186,21 +194,45 @@
             display: block;
         }
 
-        .photo-1.reveal { top: 5%; left: 5%; transform: rotate(-10deg); }
-        .photo-2.reveal { top: 8%; right: 5%; transform: rotate(8deg); }
-        .photo-3.reveal { top: 35%; left: 8%; transform: rotate(5deg); }
-        .photo-4.reveal { top: 40%; right: 10%; transform: rotate(-12deg); }
-        .photo-5.reveal { top: 65%; left: 30%; transform: rotate(-5deg); }
+        /* --- POSISI FOTO YANG LEBIH RAPIH & TENGAH (DESKTOP) --- */
+        /* Foto 1 (Kiri Atas - Agak Masuk) */
+        .photo-1.reveal { top: 10%; left: 15%; transform: rotate(-12deg); }
+        
+        /* Foto 2 (Kanan Atas - Agak Masuk) */
+        .photo-2.reveal { top: 5%; right: 15%; transform: rotate(8deg); }
+        
+        /* Foto 3 (Kiri Tengah - Agak Masuk) */
+        .photo-3.reveal { top: 40%; left: 20%; transform: rotate(5deg); }
+        
+        /* Foto 4 (Kanan Tengah - Agak Masuk) */
+        .photo-4.reveal { top: 35%; right: 20%; transform: rotate(-8deg); }
+        
+        /* Foto 5 (Tengah Bawah - Benar-benar di tengah) */
+        .photo-5.reveal { 
+            top: 60%; 
+            left: 50%; 
+            /* TranslateX -50% memastikan titik tengah foto ada di garis tengah layar */
+            transform: translateX(-50%) rotate(2deg); 
+        }
 
+        /* --- RESPONSIF UNTUK HP (MOBILE) --- */
         @media (max-width: 768px) {
             .photo-gallery { height: 500px; }
             .photo-item { width: 130px; }
             .photo-item img { height: 130px; }
-            .photo-1.reveal { top: 5%; left: 5%; }
-            .photo-2.reveal { top: 5%; right: 5%; }
-            .photo-3.reveal { top: 35%; left: 5%; }
-            .photo-4.reveal { top: 35%; right: 5%; }
-            .photo-5.reveal { top: 65%; left: 35%; transform: rotate(5deg); }
+            
+            /* Posisi Mobile yang lebih rapih */
+            .photo-1.reveal { top: 5%; left: 8%; transform: rotate(-10deg); }
+            .photo-2.reveal { top: 8%; right: 8%; transform: rotate(8deg); }
+            .photo-3.reveal { top: 35%; left: 5%; transform: rotate(5deg); }
+            .photo-4.reveal { top: 38%; right: 5%; transform: rotate(-10deg); }
+            
+            /* Foto 5 di HP tetap di tengah */
+            .photo-5.reveal { 
+                top: 65%; 
+                left: 50%; 
+                transform: translateX(-50%) rotate(-3deg); 
+            }
         }
 
         .message-card {

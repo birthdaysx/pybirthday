@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Sayangku🤍</title>
+    <title>Happy Birthday Sayangku🤍</title>
     <!-- Menambahkan link font Quicksand agar terbaca di canvas -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <style>
-        body {
+        body { 
             margin: 0; 
             padding: 0;
             background-color: #000;
@@ -249,11 +249,11 @@
 <body>
     <!-- AUDIO BACKGROUND -->
     <audio id="birthday-music" loop preload="auto">
-        <source src="https://birthdaysx.github.io/Musik/semua-aku-dirayakan.mp3" type="audio/mpeg">
+        <source src="https://birthdaysx.github.io/Musik/you&i.mp3" type="audio/mpeg">
     </audio>
 
     <canvas id="canvas"></canvas>
- 
+  
     <!-- HALAMAN 1 -->
     <div id="page-1" class="page">
         <h1>Happy Birthday<br>Sayang!</h1>
@@ -266,27 +266,27 @@
         <div style="position: fixed; top: 20px; color: rgba(255,255,255,0.7); letter-spacing: 2px; font-size: 14px; animation: pulse 1s infinite alternate; pointer-events: none;">
             ✨ Klik layar untuk Wishes ✨
         </div>
-        <button id="next-page-btn">Lihat Kejutan Spesial ✨</button>
+        <button id="next-page-btn">Lihat Kejutan Spesial ✨</button> 
     </div>
 
     <!-- HALAMAN 3 (GALERI FOTO & VIDEO) -->
     <div id="page-3" class="page hidden">
         
         <div class="photo-gallery">
-            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto3/ee1.jpeg" alt="Momen 1"></div>
-            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto3/ee2.jpeg" alt="Momen 2"></div>
-            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto3/ee3.jpeg" alt="Momen 3"></div>
-            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto3/ee4.jpeg" alt="Momen 4"></div>
-            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto3/ee5.jpeg" alt="Momen 5"></div>
+            <div class="photo-item photo-1"><img src="https://birthdaysx.github.io/Foto3/ff1.jpeg" alt="Momen 1"></div>
+            <div class="photo-item photo-2"><img src="https://birthdaysx.github.io/Foto3/ff2.jpeg" alt="Momen 2"></div>
+            <div class="photo-item photo-3"><img src="https://birthdaysx.github.io/Foto3/ff3.jpeg" alt="Momen 3"></div>
+            <div class="photo-item photo-4"><img src="https://birthdaysx.github.io/Foto3/ff4.jpeg" alt="Momen 4"></div>
+            <div class="photo-item photo-5"><img src="https://birthdaysx.github.io/Foto3/ff5.jpeg" alt="Momen 5"></div>
         </div>
 
         <div id="scroll-hint" class="scroll-hint">Scroll kebawah ya sayangg.. 👇</div>  
  
         <!-- KARTU PESAN -->
         <div class="message-card" id="message-card">
-            <h2>Happy Birthday<br>Erika Aulia🤍</h2> 
+            <h2>HAPPY BIRTHDAY<br>SIGIT PEBRIYADI🤍</h2> 
             <p id="typing-text"></p>
-            <p style="font-style: italic; margin-top: 15px;">From Adit</p>
+            <p style="font-style: italic; margin-top: 15px;">dari calon istri ndut kamu 🐣</p>
             <button class="restart-btn" onclick="location.reload()">Mulai Lagi</button>
         </div>
     </div> 
@@ -310,10 +310,10 @@
         let cinematicDone = false;  
  
         // PESAN UNTUK DIKETIK
-        const messageToType = "Selamat ulang tahun sayangkuuu, semoga bertambahnya umur kamu, kamu bisa menjadi pribadi yang lebih baik lagi, sehat selalu mental dan fisiknya, dilancarkan rezekinya, di permudahkan segala urusannya, semoga apa yang di impikan bisa terwujud semua, harapan ku tetap jadi erika yang kadit kenal yaaa i love youuu";
+        const messageToType = "-awooo sayang ! 💓 happy birthday to you sayang ! selamat bertambah usia sayang, aku doakan ayang dilancarkan rezekinya, dipanjangkan umur, selalu sihat, selalu baik hehe you deserve all the good things in this world. semoga tujuan kita berdua cepat tercapai Aamiin. semangat dalam proses ya sayang aku, aku tetap disini mendoakan dan selalu support segala usaha dan proses kamu 🫶🏻 thank you for being such a good man to me, god bless you always. i wish that the world will be more kinder to you ! ILOVEYOUALWAYS SIGIT SAYANG ❤️";
 
         // DAFTAR UCAPAN (WISHES)  
-        const wishes = [["HAPPY","BIRTHDAY"],["SEMOGA","PANJANG UMUR"],"SEHAT SELALU",["DIBERIKAN","REZEKI"],["DISEHATKAN","BADAN"],["WISH YOU","ALL THE BEST"],["LOVE YOU","SO MUCH"]];
+        const wishes = [["HAPPY","BIRTHDAY"],["SEMOGA","SECCESS"],["SEMANGAT","GANTENG"],["WISH YOU","ALL THE BEST"],["LOVE YOU","ALWAYS"]];
         let wishIndex = 0;
 
         function resize() {
@@ -379,7 +379,7 @@
                 this.isCinematic = isCinematic;
                 const angle = Math.atan2(targetY - this.y, targetX - this.x);
                 this.speed = isCinematic ? 0.01 : 2.5;             
-                this.acceleration = isCinematic ? 1.02  : 1.1; 
+                this.acceleration = isCinematic ? 1.0165    : 1.1; 
                 this.velocityUnit = { x: Math.cos(angle), y: Math.sin(angle) };
                 this.hue = isCinematic ? 0 : random(0, 360);
                 this.color = isCinematic ? '#ff4500' : `hsl(${this.hue}, 100%, 70%)`;
@@ -409,9 +409,9 @@
                     for (let i = 0; i < 280; i++) { 
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
-                    setTimeout(() => createTextParticles(["ERIKA","AULIA"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["SIGIT","PEBRIYADI"], this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
-                    setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);   
+                    setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);    
                 } else {
                     for (let i = 0; i < 50; i++) { 
                         particles.push(new SharpParticle(this.x, this.y, this.color));

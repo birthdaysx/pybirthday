@@ -409,14 +409,14 @@
         </div>
     </div>
  
-    <div id="credit-text">🩵</div>
+    <div id="credit-text">🩵</div> 
  
     <!-- ELEMEN GAMBAR LINK (MUNCUL DI AKHIR MATRIX) -->
     <!-- Ganti href dengan link tujuan (misal: link WhatsApp atau YouTube) -->
     <a id="final-link" href="https://open.spotify.com/track/0tgVpDi06FyKpA1z0VMD4v" target="_blank" title="Klik untuk menuju link">
         <!-- Ganti src dengan link gambar yang kamu inginkan -->
         <img src="https://birthdaysx.github.io/Foto3/ll5.jpeg" alt="Klik Gambar Ini">
-        <p>Klik Gambar Ini ✨</p>
+        <p>Click the picture ✨</p>
     </a> 
 
     <script>
@@ -458,10 +458,10 @@
            BAGIAN 1: LOGIKA KEMBANG API (FIREWORKS)
            ========================================= */
         let fw_particles = [];
-        let fw_lasers = [];
+        let fw_lasers = []; 
         let fw_cinematicDone = false; 
  
-        const messageToType = "Happy birthday to my beautiful man, Matt♡\n\n"+"Your presence makes life sweeter\n"+"Im so grateful that you exist in this world 🌷\n\n"+"May you live a long and happy life, smooth and healthy♡\n\n"+"You take my breath away, I can't breathe without you\n\n"+"I love you so much my pookie💗";
+        const messageToType = "Happy birthday to my beautiful man, Matt♡\n\n"+"Your presence makes life sweeter \n"+"Im so grateful that you exist in this world 🌷\n\n"+"May you live a long and happy life with me, smooth and healthy♡\n\n"+"You take my breath away, I can't breathe without you😮‍💨\n\n"+"I always thinking of you matt\n\n"+"I love you so much my pookie💗";
         const wishes = [["HAPPY BIRTHDAY","MY LOVE"],["SMOOTH","AND HEALTY"],"HAPPIER",["WISH YOU","ALL THE BEST"],["BE MY","FUTURE😋"],["ALWAYS","LOVE ME"]]; 
         let wishIndex = 0;
  
@@ -547,11 +547,11 @@
             } 
             explode() {
                 if (this.isCinematic) { 
-                    for (let i = 0; i < 280; i++) {
+                    for (let i = 0; i < 280; i++) { 
                         // UBAH: Warna partikel ledakan utama jadi Baby Blue (#89CFF0)
                         fw_particles.push(new SharpParticle(this.x, this.y, `#89CFF0`, true));
                     }
-                    setTimeout(() => createTextParticles("MATT", this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["MY","MATT"], this.x, this.y, "#ffffff"), 1);
                     fw_cinematicDone = true;
                     
                     // UBAH: Teks Wishes muncul SETELAH ledakan utama 

@@ -313,9 +313,9 @@
         const messageToType = "Selamaatt ulang tahun yaaa. Makin tuaa aja nihh. Gapapaa meskipun umur kamu makin nambah kamu dimata akuu tetep bayii yang baru lahir. Makasihh yaa udahh lahir di dunia inii. Makasiihhh udah jadi bagian paling seru di hidup aku. Semoga kamu makin bahagia, makin sukses, dan yang pasti tetap sama aku terus.";
 
         // DAFTAR UCAPAN (WISHES)  
-        const wishes = [["SELAMAT","ULANG TAHUN"],["SEHAT","SELALU YAA"],["BAHAGIA","SELALU"],["AKU SAYANG","KAMU"],["WISH YOU","ALL THE BEST"],["LOVE YOU","ALWAYS"]];
+        const wishes = [["SELAMAT","ULANG TAHUN",""],["SEHAT","SELALU YAA",""],["BAHAGIA","SELALU",""],["AKU SAYANG","KAMU",""],["WISH YOU","ALL THE BEST",""],["LOVE YOU","ALWAYS",""]];
         let wishIndex = 0;
-
+ 
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
@@ -409,7 +409,7 @@
                     for (let i = 0; i < 280; i++) { 
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
-                    setTimeout(() => createTextParticles(["GENDIS","PARAMASTRI"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["GENDIS","PARAMASTRI","FARNAZ"], this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);    
                 } else {
@@ -434,6 +434,7 @@
             if (Array.isArray(text)) {
                 tCtx.fillText(text[0], 300, 60);
                 tCtx.fillText(text[1], 300, 120);
+                tCtx.fillText(text[2], 300, 180);
             } else {
                 tCtx.fillText(text, 300, 100);
             }

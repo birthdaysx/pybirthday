@@ -399,7 +399,7 @@
                 this.x += this.velocityUnit.x * this.speed;
                 this.y += this.velocityUnit.y * this.speed;
                 if (this.y <= this.targetY) {
-                    this.explode();
+                    this.explode(); 
                     return false;
                 }
                 return true;
@@ -409,7 +409,7 @@
                     for (let i = 0; i < 280; i++) { 
                         particles.push(new SharpParticle(this.x, this.y, `#9f3a33`, true));
                     }
-                    setTimeout(() => createTextParticles(["LAMPANG"], this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles("LAMPANG", this.x, this.y, "#ffffff"), 1);
                     cinematicDone = true;
                     setTimeout(() => { nextPageBtn.style.display = 'block'; }, 5000);    
                 } else {

@@ -551,10 +551,10 @@
                         // UBAH: Warna partikel ledakan utama jadi Baby Blue (#89CFF0)
                         fw_particles.push(new SharpParticle(this.x, this.y, `#89CFF0`, true));
                     }
-                    setTimeout(() => createTextParticles("JENY", this.x, this.y, "#ffffff"), 1);
+                    setTimeout(() => createTextParticles(["JENY","PEBRIANTI"], this.x, this.y, "#ffffff"), 1);
                     fw_cinematicDone = true;
                     
-                    // UBAH: Teks Wishes muncul SETELAH ledakan utama
+                    // UBAH: Teks Wishes muncul SETELAH ledakan utama 
                     setTimeout(() => {
                         document.getElementById('wishes-hint-text').style.opacity = '1';
                     }, 1000);

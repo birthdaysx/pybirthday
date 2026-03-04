@@ -363,7 +363,7 @@
 <body>
     <!-- LAGU (Hanya 1 tag audio dari awal sampai akhir) -->
     <audio id="birthday-music" loop preload="auto">
-        <source src="https://birthdaysx.github.io/Musik/give-me-your.mp3" type="audio/mpeg">
+        <source src="https://birthdaysx.github.io/Musik/kota-ini.mp3" type="audio/mpeg"> 
     </audio>
 
     <!-- Canvas 1: Kembang Api -->
@@ -519,7 +519,7 @@
                 this.isCinematic = isCinematic;
                 const angle = Math.atan2(targetY - this.y, targetX - this.x);
                 this.speed = isCinematic ? 0.01 : 2.5;             
-                this.acceleration = isCinematic ? 1.024    : 1.1; 
+                this.acceleration = isCinematic ? 1.018     : 1.1; 
                 this.velocityUnit = { x: Math.cos(angle), y: Math.sin(angle) };
                 this.hue = isCinematic ? 0 : random(0, 360);
                 // UBAH: Warna Laser Cinematic jadi Putih kebiruan

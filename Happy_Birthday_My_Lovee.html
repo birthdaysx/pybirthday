@@ -735,9 +735,9 @@
                 <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d6.jpeg" alt="Memory 6"></div>
                 <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d7.jpeg" alt="Memory 7"></div>
                 <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d8.jpeg" alt="Memory 8"></div>
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d9.jpeg" alt="Memory 9"></div>
-                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d10.jpeg" alt="Memory 10"></div>
-            </div>  
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d10.jpeg" alt="Memory 9"></div>
+                <div class="photo-card" onclick="this.style.transform='scale(1.05) rotate(-1deg)'; setTimeout(()=>this.style.transform='', 400)"><img src="https://birthdaysx.github.io/Foto4/d9.jpeg" alt="Memory 10"></div>
+            </div>   
             <p class="italic text-xs text-sky-600 mb-4 px-15">"Scroll down to see all our moments."</p> 
             <div class="flex space-x-4"> 
                 <button onclick="nextPage(4)" class="bg-white text-sky-600 border-2 border-sky-500 px-8 py-3 rounded-full font-bold shadow-lg">Back</button>
@@ -1024,15 +1024,15 @@
             mState = "SEQUENCE";
 
             // 1. Halo Sayangku
-            updateParticleTargets(["   assalamu'alaikum   ","sayangg"]);  
-            await new Promise(r => setTimeout(r, 3500));
+            updateParticleTargets(["  Assalamu' ","alaikum ","Sayang"]);   
+            await new Promise(r => setTimeout(r, 3500));  
 
             // 2. Nama Doi
-            updateParticleTargets(["  Happy Birthday  ","My Love"]);    
-            await new Promise(r => setTimeout(r, 3500)); 
+            updateParticleTargets([" Happy "," Birthday  "," My Love "]);      
+            await new Promise(r => setTimeout(r, 3500));  
   
-            // 3. Birthday message
-            updateParticleTargets([" ◉✿Syafira "," nurlaila✿◉ "]); 
+            // 3. Birthday message 
+            updateParticleTargets([" Syafira "," Nurlaila "]);   
             await new Promise(r => setTimeout(r, 3500));   
 
             // Efek ledakan sebelum masuk ke "You Are My Love"
@@ -1104,11 +1104,11 @@
                 
                 // Baris 1
                 mCtx.font = `bold ${Math.min(mCanvas.width / 20, 38)}px "Comic Sans MS", cursive`;
-                mCtx.fillText("HAPPY BIRTHDAY 💙", centerX, centerY - 5);
+                mCtx.fillText("HAPPY BIRTHDAY", centerX, centerY - 5);
                 
-                // Baris 2  
+                // Baris 2   
                 mCtx.font = `bold ${Math.min(mCanvas.width / 22, 30)}px "Comic Sans MS", cursive`;
-                mCtx.fillText("", centerX, centerY + 25);
+                mCtx.fillText("SAYANG💙", centerX, centerY + 25); 
 
                 // LOGIKA TRANSISI: MUNCULKAN TOMBOL
                 if (mTextOpacity >= 1) {
